@@ -1,0 +1,82 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "author": {
+    "email": "joshuanwafor01@gmail.com",
+    "name": "Joshua Nwafor",
+    "url": "https://twitter.com/10xjoshua"
+  },
+  "dependencies": {
+    "@craco/craco": "^6.4.5",
+    "@emotion/react": "^11.10.0",
+    "@mantine/core": "^5.5.5",
+    "@mantine/dates": "^5.2.0",
+    "@mantine/dropzone": "^5.2.0",
+    "@mantine/form": "^5.2.0",
+    "@mantine/hooks": "^5.5.5",
+    "@mantine/modals": "^5.2.0",
+    "@mantine/notifications": "^5.2.0",
+    "@mantine/nprogress": "^5.5.5",
+    "@openapitools/openapi-generator-cli": "^2.5.1",
+    "@primer/octicons-react": "^17.3.0",
+    "@tabler/icons": "^1.78.1",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.38",
+    "@types/react": "^18.0.11",
+    "@types/react-dom": "^18.0.5",
+    "chart.js": "^3.9.1",
+    "currency-formatter": "^1.5.9",
+    "dayjs": "^1.11.5",
+    "faker": "^6.6.6",
+    "iconsax-react": "^0.0.8",
+    "mobx": "^6.6.0",
+    "mobx-react": "^7.5.0",
+    "moment": "^2.29.4",
+    "param-case": "^3.0.4",
+    "react": "^18.1.0",
+    "react-chartjs-2": "^4.3.1",
+    "react-dom": "^18.1.0",
+    "react-localization": "^1.0.19",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-social-icons": "^5.15.0",
+    "tabler-icons-react": "^1.48.1",
+    "typescript": "^4.7.3",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "gen-auth": "openapi-generator-cli generate -i http://134.209.70.120:8080/api/v1/userapi/documentation -g typescript-axios -o src/sdk/auth",
+    "gen-market-api": "openapi-generator-cli generate -i http://134.209.70.120:8081/api/v1/marketapi/documentation -g typescript-axios -o src/sdk/market"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/faker": "^6.6.9",
+    "file-loader": "^6.2.0",
+    "tsconfig-paths-webpack-plugin": "^4.0.0"
+  }
+}

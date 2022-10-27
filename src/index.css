@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'AppRegularFont';
+  font-weight: 300;
+  src: local('AppRegularFont'), url(font/Proxima-Nova-Reg.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'AppRegularFont';
+  font-weight: 400;
+  src: local('AppRegularFont'), url(font/Proxima-Nova-Reg.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'AppRegularFont';
+  font-weight: 500;
+  src: local('AppRegularFont'), url(font/Proxima-Nova-Sbold.otf);
+}
+
+@font-face {
+  font-family: 'AppRegularFont';
+  font-weight: 700;
+  src: local('AppRegularFont'), url(font/Proxima-Nova-Bold.otf);
+}
