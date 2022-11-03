@@ -9,6 +9,9 @@ import {
   Notepad2,
   Additem,
   Profile2User,
+  Bill,
+  ArrowLeft,
+  ArrowCircleLeft,
 } from "iconsax-react";
 import { LinksGroupProps } from "./components";
 
@@ -20,16 +23,16 @@ export const navigationLinks: LinksGroupProps[] = [
   { label: "Platform Agents", icon: Profile2User, link: "/agents" },
   { label: "System users", icon: People, link: "/users" },
   {
-    label: "Notifications",
-    icon: Notification,
-    link: "notifications",
+    label: "Payouts",
+    icon: Bill,
+    link: "payouts",
   },
 ];
 
 export const storeNavigationPathConfig: LinksGroupProps[] = [
+  { label: "Go back", icon: ArrowCircleLeft, link: "/" },
+  { label: "Order History", icon: ArchiveBook, link: "/store/history" },
   { label: "Overview", icon: Activity, link: "/store" },
   { label: "Products", icon: Notepad2, link: "/store/products" },
   { label: "Categories", icon: Category2, link: "/store/categories" },
-  { label: "Add Product", icon: Additem, link: "/store/add-product" },
-  { label: "Add Category", icon: Additem, link: "/store/add-product" },
 ];

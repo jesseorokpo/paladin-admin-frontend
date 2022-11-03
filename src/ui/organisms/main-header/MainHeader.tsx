@@ -23,6 +23,7 @@ import {
   ShoppingBag,
   ShoppingCart,
 } from "iconsax-react";
+import { Link } from "react-router-dom";
 import Logo from "./logo.svg";
 
 const MainHeader: React.FC<{
@@ -79,9 +80,11 @@ const MainHeader: React.FC<{
             <Box></Box>
             <Box>
               <Group>
-                <ActionIcon>
-                  <Shop color="whitesmoke" />
-                </ActionIcon>
+                <Link to={"/store"}>
+                  <ActionIcon>
+                    <Shop color="whitesmoke" />
+                  </ActionIcon>
+                </Link>
                 <ActionIcon>
                   <Notification color="whitesmoke" />
                 </ActionIcon>

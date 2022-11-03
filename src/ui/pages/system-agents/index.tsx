@@ -13,6 +13,7 @@ import {
   Title,
 } from "@mantine/core";
 import { NewUserProcess } from "@ui/organisms/processes/new-user-process";
+import { Link } from "react-router-dom";
 
 export default function SystemAgentsScreen() {
   const rows = [1, 2, 3, 4, 4].map((element) => (
@@ -39,9 +40,11 @@ export default function SystemAgentsScreen() {
       </td>
       <td>
         <Center>
-          <Button variant="outline" size="sm">
-            View
-          </Button>
+          <Link to={"/agents/agent"}>
+            <Button variant="outline" size="sm">
+              View
+            </Button>
+          </Link>
         </Center>
       </td>
     </tr>
@@ -76,7 +79,7 @@ export default function SystemAgentsScreen() {
                   { label: "Blocked", value: "vue" },
                 ]}
               />
-              <Select  data={[]} placeholder="Select School" />
+              <Select data={[]} placeholder="Select School" />
             </Group>
             <Table border={0}>
               <thead>

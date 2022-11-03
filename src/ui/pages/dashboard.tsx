@@ -1,23 +1,15 @@
 import {
   Avatar,
-  Badge,
-  Box,
   Button,
-  Container,
   Grid,
-  Group,
   Paper,
   Stack,
-  Text,
-  Title,
   useMantineTheme,
 } from "@mantine/core";
 import { VerticalKeyValuePair } from "@ui/molecules/text";
 import { MainStatsCard } from "@ui/organisms/dashboard-widgets";
 import { SectionHeader } from "@ui/organisms/header-widgets/SectionHeader";
-import ProductCard from "@ui/organisms/product-widgets/ProductCard";
 import { Card, Document, LockCircle } from "iconsax-react";
-import MainScreenHeader from "../organisms/screen-widgets/MainScreenHeader";
 
 export const DashboardScreen = () => {
   let theme = useMantineTheme();
@@ -43,6 +35,15 @@ function AccountOverview() {
         <Grid>
           <Grid.Col md={3}>
             <MainStatsCard
+              label="Total Lockers"
+              caption="this month"
+              color="orange"
+              icon={<Document variant="Bold" color="gray" />}
+              value="0"
+            />
+          </Grid.Col>
+          <Grid.Col md={3}>
+            <MainStatsCard
               label="Total Orders"
               caption="this month"
               color="orange"
@@ -52,16 +53,16 @@ function AccountOverview() {
           </Grid.Col>
           <Grid.Col md={3}>
             <MainStatsCard
-              label="Digital Lockers"
+              label="Total Agents"
               caption="this month"
               color="orange"
-              icon={<LockCircle variant="Bold" color="gray" />}
+              icon={<Card variant="Bold" color="gray" />}
               value="0"
             />
           </Grid.Col>
           <Grid.Col md={3}>
             <MainStatsCard
-              label="Expences"
+              label="Active agents"
               caption="this month"
               color="orange"
               icon={<Card variant="Bold" color="gray" />}

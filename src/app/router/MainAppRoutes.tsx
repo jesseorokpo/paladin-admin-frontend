@@ -3,7 +3,7 @@ import { DashboardScreen } from "@ui/pages/dashboard";
 import { LoginScreen } from "@ui/pages/authentication/LoginScreen";
 import { AccountNavigationShell } from "@ui/template/AccountNavigationShell";
 import { RegisterationScreen } from "@ui/pages/authentication/RegisterationScreen";
-import NotificationsScreen from "@ui/pages/notifications";
+import NotificationsScreen from "@ui/pages/payouts";
 import OrderHistoryScreen from "@ui/pages/orders-history";
 import LockersScreen from "@ui/pages/lockers";
 import LockerScreen from "@ui/pages/locker";
@@ -13,13 +13,16 @@ import CustomersScreen from "@ui/pages/customers";
 import SystemUsersScreen from "@ui/pages/system-users";
 import SystemAgentsScreen from "@ui/pages/system-agents";
 import AgentScreen from "@ui/pages/agent";
+import PayoutsScreen from "@ui/pages/payouts";
+import ProductsScreen from "@ui/pages/store/products";
+import CategoriesScreen from "@ui/pages/store/categories";
 
 export default function MainAppRoutes() {
   return (
     <Routes>
       <Route path="" element={<AccountNavigationShell />}>
-        <Route path="notifications">
-          <Route path="" element={<NotificationsScreen />} />
+        <Route path="payouts">
+          <Route path="" element={<PayoutsScreen />} />
         </Route>
         <Route path="history">
           <Route path="" element={<OrderHistoryScreen />} />
@@ -42,10 +45,11 @@ export default function MainAppRoutes() {
       </Route>
 
       <Route path="/store" element={<StoreNavigationShell />}>
-        <Route path="products"></Route>
-        <Route path="categories"></Route>
-        <Route path="add-product"></Route>
-        <Route path="add-category"></Route>
+        <Route path="products" element={<ProductsScreen />}></Route>
+        <Route path="history">
+          <Route path="" element={<OrderHistoryScreen />} />
+        </Route>
+        <Route path="categories" element={<CategoriesScreen />}></Route>
         <Route path="" element={<StoreDashboardScreen />} />
       </Route>
 
