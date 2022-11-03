@@ -62,7 +62,7 @@ function AccountOverview() {
           </Grid.Col>
           <Grid.Col md={3}>
             <MainStatsCard
-              label="Active agents"
+              label="Total Payouts "
               caption="this month"
               color="orange"
               icon={<Card variant="Bold" color="gray" />}
