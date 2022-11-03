@@ -31,8 +31,8 @@ export const navigationLinks: LinksGroupProps[] = [
 
 export const storeNavigationPathConfig: LinksGroupProps[] = [
   { label: "Go back", icon: ArrowCircleLeft, link: "/" },
-  { label: "Order History", icon: ArchiveBook, link: "/store/history" },
   { label: "Overview", icon: Activity, link: "/store" },
+  { label: "Order History", icon: ArchiveBook, link: "/store/history" },
   { label: "Products", icon: Notepad2, link: "/store/products" },
   { label: "Categories", icon: Category2, link: "/store/categories" },
 ];
