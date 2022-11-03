@@ -1,5 +1,4 @@
 import { Center, Stack, Box, Text } from "@mantine/core";
-import MarketplaceHeader from "@ui/organisms/marketplace-widgets/MarketplaceHeader";
 import { SomethingWentWrongWidget } from "@ui/organisms/utils/SomethingWentWrongWidget";
 import React from "react";
 import { Outlet } from "react-router-dom";
@@ -24,7 +23,7 @@ export class AccountNavigationShell extends React.Component<
 
   render() {
     return (
-      <MainAppShell ShellHeader={MainHeader} Navbar={MainAppNavigation} >
+      <MainAppShell ShellHeader={MainHeader} Navbar={MainAppNavigation}>
         {this.state.error ? <SomethingWentWrongWidget /> : <Outlet />}
       </MainAppShell>
     );

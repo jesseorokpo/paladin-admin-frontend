@@ -9,11 +9,10 @@ import {
 } from "@mantine/core";
 import { navigationLinks } from "./links";
 import { Logout, MessageQuestion } from "iconsax-react";
-import { NavigationLinks } from "./NavigationLinks";
+import { NavigationLinks, StoreNavigationLinks } from "./NavigationLinks";
 import { useStyles } from "./style";
 
-
-const MainAppNavigation: React.FC<{
+const StoreNavigation: React.FC<{
   setOpened: (data: any) => void;
   opened: boolean;
 }> = ({ opened, setOpened }) => {
@@ -29,23 +28,11 @@ const MainAppNavigation: React.FC<{
     >
       <Navbar.Section grow className={classes.links} component={ScrollArea}>
         <div className={classes.linksInner}>
-          <NavigationLinks />
+          <StoreNavigationLinks/>
         </div>
-      </Navbar.Section>
-
-      <Navbar.Section className={classes.footer}>
-        <Stack pl="4px">
-          <Group>
-            <MessageQuestion size={18} variant="Bold" />{" "}
-            <Text size={"sm"}>Support</Text>
-          </Group>
-          <Group>
-            <Logout size={18} variant="Bold" /> <Text size={"sm"}>Log out</Text>
-          </Group>
-        </Stack>
       </Navbar.Section>
     </Navbar>
   );
 };
 
-export default MainAppNavigation;
+export default StoreNavigation;

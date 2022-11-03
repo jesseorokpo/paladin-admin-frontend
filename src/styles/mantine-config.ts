@@ -32,7 +32,7 @@ export const MaintineThemeConfig: MantineThemeOverride = {
               background: theme.colors.gray[6],
               color: theme.colors.gray[3],
             },
-            borderRadius: 8,
+            borderRadius: 50,
           },
         };
       },

@@ -1,45 +1,45 @@
 import {
+  Avatar,
   Box,
   Button,
   Center,
   Group,
+  Input,
   Paper,
-  SegmentedControl,
   Stack,
   Table,
   Title,
 } from "@mantine/core";
-import { Link } from "react-router-dom";
-import { formatCurrency } from "../../../utils";
+import { NewUserProcess } from "@ui/organisms/processes/new-user-process";
 
-export default function LockersScreen() {
+export default function SystemUsersScreen() {
   const rows = [1, 2, 3, 4, 4].map((element) => (
     <tr
       key={element}
       style={{
         border: "0px solid black",
-        alignItems: "flex-start",
-        alignContent: "flex-start",
       }}
     >
-      <td>{"#12345"}</td>
       <td>
-        <div>{`Joshua Nwafor`}</div>
-        <div>{`Owner Id`}</div>
+        <Avatar />
       </td>
-      <td>{"LOGISS"}</td>
+      <td>
+        <div>Joshua Nwafor</div>
+        <div>joshuanwafor01@gmail</div>
+      </td>
+      <td>
+        <div>{`+2349017283696`}</div>
+      </td>
+      <td>{"Student"}</td>
       <td>{"03-Sep-2022"}</td>
       <td>
-        <div>{"(10) Items"}</div>
-        <div>{formatCurrency(1000)}</div>
+        <div>{"192.102.100"}</div>
       </td>
       <td>
         <Center>
-          <Link to={"/lockers/locker"}>
-            <Button variant="outline" size="sm">
-              View
-            </Button>
-          </Link>
+          <Button variant="outline" size="sm">
+            View
+          </Button>
         </Center>
       </td>
     </tr>
@@ -58,26 +58,23 @@ export default function LockersScreen() {
           <Stack>
             <Group position="apart">
               <Box>
-                <Title sx={{ fontSize: 24 }}>Digital Lockers</Title>
+                <Title sx={{ fontSize: 24 }}>System users (19)</Title>
               </Box>
-              <SegmentedControl
-                data={[
-                  { label: "All Lockers", value: "all" },
-                  { label: "Active", value: "active" },
-                  { label: "Blocked", value: "blocked" },
-                  { label: "Pending", value: "pending" },
-                ]}
-              />
+              <Group>
+                <Input radius={"xl"} placeholder="Search Customer" />
+                <NewUserProcess />
+              </Group>
             </Group>
 
             <Table border={0}>
               <thead>
                 <tr>
-                  <th>PID</th>
+                  <th>Avatar</th>
                   <th>Profile</th>
-                  <th>School</th>
-                  <th>Last Used</th>
-                  <th>Items</th>
+                  <th>Phone</th>
+                  <th>User Type</th>
+                  <th>Last Seen</th>
+                  <th>Location</th>
                   <th style={{ textAlign: "center" }}>Active</th>
                 </tr>
               </thead>

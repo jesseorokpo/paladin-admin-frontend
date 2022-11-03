@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AppShell, useMantineTheme } from "@mantine/core";
-import MarketplaceFooter from "@ui/organisms/marketplace-widgets/MarketplaceFooter";
 
 type MainAppShellProps = {
   children: any;
@@ -37,7 +36,7 @@ export const MainAppShell: React.FC<MainAppShellProps> = ({
         )
       }
       header={<ShellHeader opened={opened} setOpened={setOpened} />}
-      footer={Navbar == undefined ? <MarketplaceFooter /> : undefined}
+      footer={Navbar == undefined ? undefined: undefined}
     >
       <div>{children}</div>
     </AppShell>

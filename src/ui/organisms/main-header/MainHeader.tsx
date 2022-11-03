@@ -19,10 +19,10 @@ import {
   CardTick,
   Message,
   Notification,
+  Shop,
   ShoppingBag,
   ShoppingCart,
 } from "iconsax-react";
-import { CartWidget } from "../cart/CartWidget";
 import Logo from "./logo.svg";
 
 const MainHeader: React.FC<{
@@ -36,8 +36,9 @@ const MainHeader: React.FC<{
       sx={(theme) => {
         return {
           borderBottom: "0px solid gray",
-          boxShadow: theme.shadows.md,
           zIndex: 200,
+          background: theme.primaryColor,
+          color: "whitesmoke",
         };
       }}
     >
@@ -78,9 +79,11 @@ const MainHeader: React.FC<{
             <Box></Box>
             <Box>
               <Group>
-                <CartWidget />
                 <ActionIcon>
-                  <Notification />
+                  <Shop color="whitesmoke" />
+                </ActionIcon>
+                <ActionIcon>
+                  <Notification color="whitesmoke" />
                 </ActionIcon>
                 <UserPrimaryActions />
               </Group>
@@ -111,7 +114,7 @@ function UserPrimaryActions() {
             sx={{ borderRadius: 50 }}
             src="https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg"
           />
-          <Box sx={{ textAlign: "center" }}>
+          <Box sx={{ textAlign: "center", color: "gray" }}>
             <Text sx={{ fontWeight: "bold" }}>Emekus Kalu</Text>
             <Text>emekusenterprise@gmail.com</Text>
           </Box>

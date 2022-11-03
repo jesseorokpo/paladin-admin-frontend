@@ -1,11 +1,13 @@
 import { Center, Stack, Box, Text } from "@mantine/core";
-import MarketplaceHeader from "@ui/organisms/marketplace-widgets/MarketplaceHeader";
 import { SomethingWentWrongWidget } from "@ui/organisms/utils/SomethingWentWrongWidget";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import MainAppShell from "@ui/template/MainAppShell";
+import MainAppNavigation from "@ui/organisms/main-navigation/MainNavigation";
+import MainHeader from "@ui/organisms/main-header/MainHeader";
+import StoreNavigation from "@ui/organisms/main-navigation/StoreNavigation";
 
-export class PlatformNavigationShell extends React.Component<
+export class StoreNavigationShell extends React.Component<
   {},
   { error: null | undefined | boolean | any; errorInfo: any }
 > {
@@ -21,11 +23,8 @@ export class PlatformNavigationShell extends React.Component<
   }
 
   render() {
-    // if (this.state.error) {
-    //   return <SomethingWentWrongWidget />;
-    // }
     return (
-      <MainAppShell ShellHeader={MarketplaceHeader}>
+      <MainAppShell ShellHeader={MainHeader} Navbar={StoreNavigation}>
         {this.state.error ? <SomethingWentWrongWidget /> : <Outlet />}
       </MainAppShell>
     );

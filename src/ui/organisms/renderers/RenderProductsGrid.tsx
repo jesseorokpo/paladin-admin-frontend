@@ -1,6 +1,4 @@
 import { Box, Grid } from "@mantine/core";
-import { MarketCard } from "@ui/organisms/marketplace-widgets/MarketCard";
-import { MainProductCard } from "../product-widgets/MainProductCard";
 import ProductCard from "../product-widgets/ProductCard";
 
 export default function RenderProductsGrid({

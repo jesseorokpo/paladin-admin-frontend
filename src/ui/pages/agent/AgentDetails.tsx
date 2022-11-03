@@ -2,7 +2,7 @@ import { Avatar, Box, Button, Grid, Group, Stack } from "@mantine/core";
 import { VerticalKeyValuePair } from "@ui/molecules/text";
 import { SectionHeader } from "@ui/organisms/header-widgets/SectionHeader";
 
-export const LockerDetails = () => {
+export const AgentDetails = () => {
   return (
     <Box my="md">
       <Box>
@@ -19,7 +19,6 @@ export const LockerDetails = () => {
               </Button>
             </Stack>
           </Group>
-
           <VerticalKeyValuePair label="First Name" value="Joshua" />
           <VerticalKeyValuePair label="Last Name" value="Nwafor" />
           <VerticalKeyValuePair label="Middle Name" value="Chukwudi" />
