@@ -68,7 +68,7 @@ const MainHeader: React.FC<{
             }}
             p="md"
           >
-            <Title size={"md"}>Paladin Ecommerce</Title>
+            <Title size={"md"}>Paladin Admin</Title>
           </Box>
         </MediaQuery>
         <Box p="md" sx={{ flex: 1 }}>

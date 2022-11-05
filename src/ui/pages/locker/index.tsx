@@ -45,7 +45,7 @@ export default function LockerScreen() {
               <Tabs.List>
                 <Tabs.Tab value="profile">Details</Tabs.Tab>
                 <Tabs.Tab value="items">Assets (0)</Tabs.Tab>
-                <Tabs.Tab value="history">Use History</Tabs.Tab>
+                <Tabs.Tab value="history">Purchases</Tabs.Tab>
               </Tabs.List>
 
               <Tabs.Panel value="profile" pt="xs">
