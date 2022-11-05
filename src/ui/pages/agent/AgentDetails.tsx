@@ -27,14 +27,14 @@ export const AgentDetails = () => {
       </Box>
 
       <Box mt={"md"}>
-        <SectionHeader title="Locker Profile" showBorder={false} />
+        <SectionHeader title="Store Profile" showBorder={false} />
         <Stack mt="md">
           <Grid>
             <Grid.Col md={6}>
-              <VerticalKeyValuePair label="Total Items" value="10 Items" />
+              <VerticalKeyValuePair label="Total Sales" value="10 Items" />
             </Grid.Col>
             <Grid.Col md={6}>
-              <VerticalKeyValuePair label="Items Value" value="$100" />
+              <VerticalKeyValuePair label="Total Payouts" value="$100" />
             </Grid.Col>
           </Grid>
           <VerticalKeyValuePair label="Status" value="Value" />
