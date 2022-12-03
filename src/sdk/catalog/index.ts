@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Authorization Docs
- * Basic user authorization features
+ * Catalog Docs
+ * Basic store catalog management features
  *
  * The version of the OpenAPI document: 1.0
  * 

@@ -71,11 +71,7 @@ export const MaintineThemeConfig: MantineThemeOverride = {
         };
       },
     },
-    Select: {
-      styles(theme, params) {
-        return {};
-      },
-    },
+
     Modal: {
       styles(theme, params) {
         return {

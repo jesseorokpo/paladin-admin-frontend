@@ -1,11 +1,6 @@
 import { showNotification } from "@mantine/notifications";
 import { makeAutoObservable, observable } from "mobx";
-import {
-  User,
-  AuthControllerApi,
-  LoginRequest,
-  SocialRequestPlatformEnum,
-} from "../../sdk/auth";
+import { AuthApi, LoginDto } from "../../sdk/auth";
 import { AxiosError } from "axios";
 import {
   startNavigationProgress,
@@ -20,40 +15,11 @@ class LoginManager {
     makeAutoObservable(this, { user: observable });
   }
 
-  async login(request: LoginRequest) {
+  async login(request: LoginDto) {
     try {
       startNavigationProgress();
-      let response = await new AuthControllerApi().login(request);
+      let response = await new AuthApi().authControllerLogin(request);
       console.log(response.data);
-      completeNavigationProgress();
-    } catch (err) {
-      let message = handleAxiosError(err);
-      showNotification({ message: "Authentication failed..." });
-      completeNavigationProgress();
-    }
-  }
-  async loginFacebook(platform: SocialRequestPlatformEnum) {
-    try {
-      startNavigationProgress();
-      let response = await new AuthControllerApi().loginFacebook({
-        platform: platform,
-        accessToken: "",
-      });
-      completeNavigationProgress();
-    } catch (err) {
-      let message = handleAxiosError(err);
-      showNotification({ message: "Authentication failed..." });
-      completeNavigationProgress();
-    }
-  }
-
-  async loginGoogle(platform: SocialRequestPlatformEnum) {
-    try {
-      startNavigationProgress();
-      let response = await new AuthControllerApi().loginGoogle({
-        platform: platform,
-        accessToken: "",
-      });
       completeNavigationProgress();
     } catch (err) {
       let message = handleAxiosError(err);

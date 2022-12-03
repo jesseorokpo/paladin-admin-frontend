@@ -1,6 +1,5 @@
 import { makeAutoObservable, observable, runInAction } from "mobx";
-import { authController, userController } from "../../config/sdk";
-import { User } from "../../sdk/auth";
+import { authController } from "../../config/sdk";
 
 class AuthManager {
   //@ts-ignore
@@ -11,7 +10,7 @@ class AuthManager {
   }
 
   initAccountToken(token: string) {
-    localStorage.setItem("zu-token", token);
+    localStorage.setItem("u-token", token);
     this.init();
   }
 
@@ -28,7 +27,7 @@ class AuthManager {
 
   async loadProfile() {
     try {
-      let response = await userController.getUser();
+      let response = await authController.authControllerGetProfile();
       runInAction(() => {
         this.user = response.data;
       });

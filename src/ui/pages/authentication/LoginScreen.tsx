@@ -38,8 +38,6 @@ export function LoginScreen(props: any) {
             await loginManager.login({
               email: values.email,
               password: values.password,
-              platform: "BRAND_SELLER",
-              rememberMe: true,
             });
 
             setSubmitting(false);

@@ -33,6 +33,7 @@
     "dayjs": "^1.11.5",
     "faker": "^6.6.6",
     "iconsax-react": "^0.0.8",
+    "mantine-datatable": "^1.7.22",
     "mobx": "^6.6.0",
     "mobx-react": "^7.5.0",
     "moment": "^2.29.4",
@@ -40,6 +41,7 @@
     "react": "^18.1.0",
     "react-chartjs-2": "^4.3.1",
     "react-dom": "^18.1.0",
+    "react-dropzone": "^14.2.3",
     "react-localization": "^1.0.19",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -53,8 +55,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "gen-auth": "openapi-generator-cli generate -i http://134.209.70.120:8080/api/v1/userapi/documentation -g typescript-axios -o src/sdk/auth",
-    "gen-market-api": "openapi-generator-cli generate -i http://134.209.70.120:8081/api/v1/marketapi/documentation -g typescript-axios -o src/sdk/market"
+    "gen-auth": "openapi-generator-cli generate -i http://localhost:5000/docs/auth-json -g typescript-axios -o src/sdk/auth",
+    "gen-catalog-api": "openapi-generator-cli generate -i http://localhost:5000/docs/catalog-json -g typescript-axios -o src/sdk/catalog"
   },
   "eslintConfig": {
     "extends": [

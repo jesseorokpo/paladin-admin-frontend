@@ -42,12 +42,12 @@ export function RegisterationScreen(props: any) {
             onSubmit={form.onSubmit(async (values) => {
               try {
                 setSubmitting(true);
-                await registerationManager.createAccount({
-                  ...values,
-                  countryCode: "NG",
-                  gender: "MALE",
-                  platform: "BRAND_SELLER",
-                });
+                // await registerationManager.createAccount({
+                //   ...values,
+                //   countryCode: "NG",
+                //   gender: "MALE",
+                //   platform: "BRAND_SELLER",
+                // });
                 setSubmitting(false);
               } catch (e) {
                 setSubmitting(false);

@@ -1,15 +1,16 @@
 import {
+  ActionIcon,
   Box,
-  Button,
+  Divider,
   Group,
-  Input,
   Paper,
   Stack,
-  Table,
   Title,
 } from "@mantine/core";
-import { IconDownload, IconFileDownload } from "@tabler/icons";
-import { RenderOrders } from "@ui/organisms/renderers/order/RenderOrders";
+import { orderManager } from "@store/catalog/order";
+import { ArrowDown2 } from "iconsax-react";
+import { DataTable } from "mantine-datatable";
+import { Expand } from "../store/products/Expand";
 
 export default function OrderHistoryScreen() {
   return (
@@ -37,19 +38,71 @@ function InvoicesOverview() {
           </Box>
         </Group>
 
-        <Stack
-          sx={(theme) => {
-            return {
-              padding: 12,
-            };
-          }}
-        >
-          <Group position="apart" spacing={"xl"}>
-            <Box sx={{ flex: 1 }}></Box>
-          </Group>
+        <Divider />
 
-          <RenderOrders items={[1, 2, 3, 34, 4, 5]} />
-        </Stack>
+        <DataTable
+          height={500}
+          striped={false}
+          withColumnBorders
+          style={{ background: "ghostwhite", paddingTop: 0 }}
+          verticalSpacing="md"
+          noRecordsIcon={true}
+          borderRadius="xs"
+          records={orderManager.items}
+          withBorder={false}
+          rowExpansion={{
+            allowMultiple: true,
+            content: (props) => {
+              return (
+                <Box p="md">
+                  <Box px="12px" sx={{ background: "ghostwhite" }}></Box>
+                </Box>
+              );
+            },
+          }}
+          columns={[
+            {
+              accessor: "id",
+              title: "#",
+              textAlignment: "center",
+              width: 50,
+              render: ({}) => (
+                <Group position="center">
+                  <Box sx={{ width: 10, height: 10, background: "gray" }}></Box>
+                </Group>
+              ),
+            },
+
+            {
+              accessor: "name",
+              title: "Name",
+            },
+            {
+              accessor: "price",
+              title: "Total",
+            },
+            {
+              accessor: "status",
+              title: "Status",
+            },
+            {
+              accessor: "items",
+              title: "Description",
+            },
+            {
+              accessor: "d",
+              title: "Action",
+              width: 100,
+              render: ({}) => (
+                <Group>
+                  <ActionIcon>
+                    <ArrowDown2 variant="Bold" />
+                  </ActionIcon>
+                </Group>
+              ),
+            },
+          ]}
+        />
       </Stack>
     </Paper>
   );

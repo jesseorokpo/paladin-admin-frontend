@@ -1,40 +1,33 @@
-import { AuthControllerApi, UserControllerApi } from "../sdk/auth";
-import axios from "axios";
+import { AuthApi } from "../sdk/auth";
 import {
-  BusinessCategoryControllerApi,
-  MarketControllerApi,
-  ShopAdminControllerApi,
-  ShopControllerApi,
-  ShopProductAdminControllerApi,
-  ShopProductControllerApi,
-  StateControllerApi,
-} from "../sdk/market";
-export let authController = new AuthControllerApi();
+  LockerApi,
+  OrderControllerApi,
+  ProductApi,
+  TaxonomyApi,
+} from "../sdk/catalog";
+import { TOKEN } from "./config";
 
-export let userController = new UserControllerApi();
-
-export let businessCategoryController = new BusinessCategoryControllerApi();
-
-export let marketController = new MarketControllerApi();
-export let shopAdminController = new ShopAdminControllerApi();
-
-export let shopProductAdminController = new ShopProductAdminControllerApi();
-
-export let shopController = new ShopControllerApi();
-export let shopProductController = new ShopProductControllerApi();
-export let stateController = new StateControllerApi();
+export let authController = new AuthApi();
+export let productApiController = new ProductApi();
+export let taxonomyApiController = new TaxonomyApi();
+export let lockerApiController = new LockerApi();
+export let orderControllerApi = new OrderControllerApi();
 
 export function configureClientSDK(token: string) {
   let config = {
+    accessToken: token,
     isJsonMime: (mime: any) => {
       return true;
     },
   };
-  let axiosConfig = axios.create({
-    headers: { Authorization: `Bearer ${token}` },
-  });
 
-  userController = new UserControllerApi(config, undefined, axiosConfig);
+  productApiController = new ProductApi(config);
+  taxonomyApiController = new TaxonomyApi(config);
+  lockerApiController = new LockerApi(config);
+  orderControllerApi = new OrderControllerApi(config);
+  authController = new AuthApi(config);
 
-  authController = new AuthControllerApi(config, undefined, axiosConfig);
+  localStorage.setItem("u-token", token);
 }
+
+configureClientSDK(TOKEN);

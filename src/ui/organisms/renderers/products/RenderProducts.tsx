@@ -10,10 +10,11 @@ import {
   Text,
 } from "@mantine/core";
 import { Edit } from "iconsax-react";
+import { Product } from "../../../../sdk/catalog";
 
-export const RenderProducts = ({ items }: { items: any[] }) => {
-  const rows = items.map((element) => (
-    <tr key={element} style={{ border: "0px solid black" }}>
+export const RenderProducts = ({ items }: { items: Product[] }) => {
+  const rows = items.map((element, index) => (
+    <tr key={index} style={{ border: "0px solid black" }}>
       <td>
         <Avatar />
       </td>
