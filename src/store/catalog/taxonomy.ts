@@ -17,7 +17,7 @@ class Manager {
   loadItems() {
     taxonomyApiController.taxonomyControllerGet().then((payload) => {
       runInAction(() => {
-        this.items = payload.data;
+        this.items = payload.data??[];
       });
     });
   }

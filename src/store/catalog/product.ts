@@ -13,9 +13,12 @@ class Manager {
 
   loadItems() {
     productApiController.productControllerGet().then((payload) => {
+      console.log(payload)
       runInAction(() => {
-        this.items = payload.data;
+        this.items = payload.data??[];
       });
+    }).catch(err=>{
+      console.log(err);
     });
   }
 
