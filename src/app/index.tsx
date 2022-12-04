@@ -8,6 +8,8 @@ import { MaintineThemeConfig } from "../styles/mantine-config";
 import { useUtilsLoader } from "../hooks/loader";
 import axios from "axios";
 import { dataManager } from "@store/data";
+import AppAuthRoutes from "./router/AppAuthRoutes";
+import { authManager } from "@store/account/auth";
 
 export default observer(function () {
   let [appState, setAppState] = React.useState("loaded");
@@ -16,8 +18,11 @@ export default observer(function () {
   React.useEffect(() => {
     dataManager.loadCategories();
     dataManager.loadProducts();
-  },[]);
+  }, []);
   // return <div>I AM WORKING</div>;
+
+  let authStatus = "";
+  authStatus = authManager.status;
 
   return (
     <React.Fragment>
@@ -28,7 +33,21 @@ export default observer(function () {
           withNormalizeCSS
         >
           <NotificationsProvider>
-            <MainAppRoutes />
+            {appState == "loaded" ? (
+              authStatus == "authenticated" ? (
+                <React.Fragment>
+                  <MainAppRoutes />
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <AppAuthRoutes />
+                </React.Fragment>
+              )
+            ) : (
+              <React.Fragment>
+                <div>Initializing</div>
+              </React.Fragment>
+            )}
           </NotificationsProvider>
         </MantineProvider>
       </BrowserRouter>

@@ -21,15 +21,11 @@ export function LoginScreen(props: any) {
       email: "",
       password: "",
     },
-
-    // validate: {
-    //   email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-    // },
   });
 
   return (
     <Box>
-      <RenderPlatformBanner />
+      <RenderPlatformBanner  />
 
       <form
         onSubmit={form.onSubmit(async (values) => {
@@ -63,12 +59,9 @@ export function LoginScreen(props: any) {
             />
 
             <Button size="lg" type="submit" loading={submitting}>
-              Signin
+              Authorize
             </Button>
-            <Text sx={{ textAlign: "center" }}>
-              Don’t have a seller account?{" "}
-              <span style={{ fontWeight: "bold" }}>Register</span>
-            </Text>
+        
           </Stack>
         </Container>
       </form>

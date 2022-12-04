@@ -5,8 +5,8 @@ export const RenderPlatformBanner = () => {
     <Box sx={{ background: "#482919", marginBottom: 24 }}>
       <Container>
         <Box py={32} sx={{ textAlign: "center", color: "white" }}>
-          <Title>Paladin Ecommerce</Title>
-          <Text>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
+          <Title>Paladin Admin</Title>
+          <Text>Restricted to system users</Text>
         </Box>
       </Container>
     </Box>
