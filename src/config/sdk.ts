@@ -1,4 +1,5 @@
 import { AuthApi } from "../sdk/auth";
+import axios from "axios";
 import {
   LockerApi,
   OrderControllerApi,
@@ -14,6 +15,12 @@ export let lockerApiController = new LockerApi();
 export let orderControllerApi = new OrderControllerApi();
 
 export function configureClientSDK(token: string) {
+  let axiosConfig = axios.create({
+    headers: {
+      "Bypass-Tunnel-Reminder": "bypass",
+    },
+  });
+
   let config = {
     accessToken: token,
     isJsonMime: (mime: any) => {
@@ -21,11 +28,11 @@ export function configureClientSDK(token: string) {
     },
   };
 
-  productApiController = new ProductApi(config);
-  taxonomyApiController = new TaxonomyApi(config);
-  lockerApiController = new LockerApi(config);
-  orderControllerApi = new OrderControllerApi(config);
-  authController = new AuthApi(config);
+  productApiController = new ProductApi(config, undefined, axiosConfig);
+  taxonomyApiController = new TaxonomyApi(config, undefined, axiosConfig);
+  lockerApiController = new LockerApi(config, undefined, axiosConfig);
+  orderControllerApi = new OrderControllerApi(config, undefined, axiosConfig);
+  authController = new AuthApi(config, undefined, axiosConfig);
 
   localStorage.setItem("u-token", token);
 }

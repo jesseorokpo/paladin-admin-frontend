@@ -13,10 +13,11 @@ import { taxonomyManager } from "@store/catalog/taxonomy";
 import { NewCategoryProcess } from "@ui/organisms/processes/new-category-process";
 import { ArrowDown2 } from "iconsax-react";
 import { DataTable } from "mantine-datatable";
+import { observer } from "mobx-react";
 import { useEffect } from "react";
 import { Expand } from "./Expand";
 
-export default function CategoriesScreen() {
+export default observer(function CategoriesScreen() {
   useEffect(() => {
     taxonomyManager.loadItems();
   }, []);
@@ -53,7 +54,7 @@ export default function CategoriesScreen() {
               verticalSpacing="md"
               noRecordsIcon={true}
               borderRadius="xs"
-              records={taxonomyManager.items}
+              records={taxonomyManager.items.slice()}
               withBorder={false}
               rowExpansion={{
                 allowMultiple: true,
@@ -118,4 +119,4 @@ export default function CategoriesScreen() {
       </Stack>
     </Box>
   );
-}
+});
