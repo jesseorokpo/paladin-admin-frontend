@@ -25,6 +25,17 @@ class AuthManager {
     this.loadProfile();
   }
 
+  dummyLogin() {
+    // let token = localStorage.getItem("zu-token");
+    // if (token == null) {
+    //   return;
+    // }
+    runInAction(() => {
+      this.status = "AUTHENTICATED";
+    });
+    // this.loadProfile();
+  }
+
   async loadProfile() {
     try {
       let response = await authController.authControllerGetProfile();

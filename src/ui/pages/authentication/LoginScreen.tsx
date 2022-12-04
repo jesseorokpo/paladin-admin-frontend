@@ -25,7 +25,7 @@ export function LoginScreen(props: any) {
 
   return (
     <Box>
-      <RenderPlatformBanner  />
+      <RenderPlatformBanner />
 
       <form
         onSubmit={form.onSubmit(async (values) => {
@@ -61,7 +61,6 @@ export function LoginScreen(props: any) {
             <Button size="lg" type="submit" loading={submitting}>
               Authorize
             </Button>
-        
           </Stack>
         </Container>
       </form>

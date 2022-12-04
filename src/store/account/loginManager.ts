@@ -7,6 +7,7 @@ import {
   completeNavigationProgress,
 } from "@mantine/nprogress";
 import { handleAxiosError } from "../../utils";
+import { authManager } from "./auth";
 
 class LoginManager {
   //@ts-ignore
@@ -19,6 +20,7 @@ class LoginManager {
     try {
       startNavigationProgress();
       let response = await new AuthApi().authControllerLogin(request);
+      authManager.dummyLogin()
       console.log(response.data);
       completeNavigationProgress();
     } catch (err) {

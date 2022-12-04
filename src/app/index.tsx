@@ -34,7 +34,7 @@ export default observer(function () {
         >
           <NotificationsProvider>
             {appState == "loaded" ? (
-              authStatus == "authenticated" ? (
+              authStatus == "AUTHENTICATED" ? (
                 <React.Fragment>
                   <MainAppRoutes />
                 </React.Fragment>
