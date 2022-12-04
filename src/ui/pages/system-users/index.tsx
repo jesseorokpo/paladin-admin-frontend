@@ -1,8 +1,10 @@
 import {
+  ActionIcon,
   Avatar,
   Box,
   Button,
   Center,
+  Divider,
   Group,
   Input,
   Paper,
@@ -10,41 +12,12 @@ import {
   Table,
   Title,
 } from "@mantine/core";
+import { productManager } from "@store/catalog/product";
 import { NewUserProcess } from "@ui/organisms/processes/new-user-process";
+import { ArrowDown2 } from "iconsax-react";
+import { DataTable } from "mantine-datatable";
 
 export default function SystemUsersScreen() {
-  const rows = [1, 2, 3, 4, 4].map((element) => (
-    <tr
-      key={element}
-      style={{
-        border: "0px solid black",
-      }}
-    >
-      <td>
-        <Avatar />
-      </td>
-      <td>
-        <div>Joshua Nwafor</div>
-        <div>joshuanwafor01@gmail</div>
-      </td>
-      <td>
-        <div>{`+2349017283696`}</div>
-      </td>
-      <td>{"Student"}</td>
-      <td>{"03-Sep-2022"}</td>
-      <td>
-        <div>{"192.102.100"}</div>
-      </td>
-      <td>
-        <Center>
-          <Button variant="outline" size="sm">
-            View
-          </Button>
-        </Center>
-      </td>
-    </tr>
-  ));
-
   return (
     <Box style={{ overflow: "hidden !important" }} mt="xl">
       <Stack>
@@ -66,20 +39,79 @@ export default function SystemUsersScreen() {
               </Group>
             </Group>
 
-            <Table border={0}>
-              <thead>
-                <tr>
-                  <th>Avatar</th>
-                  <th>Profile</th>
-                  <th>Phone</th>
-                  <th>User Type</th>
-                  <th>Last Seen</th>
-                  <th>Location</th>
-                  <th style={{ textAlign: "center" }}>Active</th>
-                </tr>
-              </thead>
-              <tbody>{rows}</tbody>
-            </Table>
+            <Divider />
+
+            <DataTable
+              height={500}
+              striped={false}
+              withColumnBorders
+              style={{ background: "ghostwhite", paddingTop: 0 }}
+              verticalSpacing="md"
+              noRecordsIcon={true}
+              borderRadius="xs"
+              records={[]}
+              withBorder={false}
+              rowExpansion={{
+                allowMultiple: true,
+                content: (props) => {
+                  return (
+                    <Box p="md">
+                      <Box px="12px" sx={{ background: "ghostwhite" }}>
+                        {/* <Expand product={props.record} /> */}
+                      </Box>
+                    </Box>
+                  );
+                },
+              }}
+              columns={[
+                {
+                  accessor: "id",
+                  title: "#",
+                  textAlignment: "center",
+                  width: 50,
+                  render: ({}) => (
+                    <Group position="center">
+                      <Box
+                        sx={{ width: 10, height: 10, background: "gray" }}
+                      ></Box>
+                    </Group>
+                  ),
+                },
+                {
+                  accessor: "image",
+                  title: "Image",
+                  render: ({ image }) => <Avatar src={image ?? ""} />,
+                },
+                {
+                  accessor: "name",
+                  title: "Fullname",
+                },
+                {
+                  accessor: "phone",
+                  title: "Phone",
+                },
+                {
+                  accessor: "email",
+                  title: "Email",
+                },
+                {
+                  accessor: "status",
+                  title: "Active",
+                },
+                {
+                  accessor: "d",
+                  title: "Action",
+                  width: 100,
+                  render: ({}) => (
+                    <Group>
+                      <ActionIcon>
+                        <ArrowDown2 variant="Bold" />
+                      </ActionIcon>
+                    </Group>
+                  ),
+                },
+              ]}
+            />
           </Stack>
         </Paper>
       </Stack>
