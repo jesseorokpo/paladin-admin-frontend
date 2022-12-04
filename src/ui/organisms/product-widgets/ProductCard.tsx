@@ -9,7 +9,6 @@ import {
   Title,
   useMantineTheme,
 } from "@mantine/core";
-import { cartManager } from "@store/cart";
 import { IconCamera } from "@tabler/icons";
 import { Camera, ShoppingCart } from "iconsax-react";
 import { useNavigate } from "react-router-dom";
@@ -82,7 +81,7 @@ export default function ProductCard({ product }: { product: TProduct }) {
 
               <ActionIcon
                 onClick={() => {
-                  cartManager.addItem(product);
+                
                 }}
               >
                 <ShoppingCart color={theme.colors.brown[5]} />

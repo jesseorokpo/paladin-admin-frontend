@@ -11,31 +11,11 @@ class DataManager {
   }
 
   loadCategories() {
-    fetch("https://dummyjson.com/products/categories")
-      .then(async (res) => {
-        let data = await res.json();
-        console.log(data);
-        runInAction(() => {
-          this.categories = data;
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  
   }
 
   loadProducts() {
-    fetch("https://dummyjson.com/products")
-      .then(async (res) => {
-        let data = await res.json();
-        console.log(data);
-        runInAction(() => {
-          this.products = data.products;
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+   
   }
 }
 
