@@ -13,7 +13,6 @@ import { authManager } from "@store/account/auth";
 
 export default observer(function () {
   let [appState, setAppState] = React.useState("loaded");
-  let checkAuthStatus;
 
   React.useEffect(() => {
     dataManager.loadCategories();
