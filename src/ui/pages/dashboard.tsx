@@ -10,6 +10,7 @@ import { VerticalKeyValuePair } from "@ui/molecules/text";
 import { MainStatsCard } from "@ui/organisms/dashboard-widgets";
 import { SectionHeader } from "@ui/organisms/header-widgets/SectionHeader";
 import { Card, Document, LockCircle } from "iconsax-react";
+import { observer } from "mobx-react";
 
 export const DashboardScreen = () => {
   let theme = useMantineTheme();
@@ -21,7 +22,7 @@ export const DashboardScreen = () => {
   );
 };
 
-function AccountOverview() {
+const AccountOverview = observer(() => {
   return (
     <Paper
       p={"18px"}
@@ -73,9 +74,9 @@ function AccountOverview() {
       </Stack>
     </Paper>
   );
-}
+});
 
-function AccountOthers() {
+const AccountOthers = observer(() => {
   return (
     <Paper
       p={"18px"}
@@ -125,4 +126,4 @@ function AccountOthers() {
       </Stack>
     </Paper>
   );
-}
+});

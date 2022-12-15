@@ -1,8 +1,9 @@
 import { Avatar, Box, Button, Grid, Group, Stack } from "@mantine/core";
 import { VerticalKeyValuePair } from "@ui/molecules/text";
 import { SectionHeader } from "@ui/organisms/header-widgets/SectionHeader";
+import { Locker } from "../../../sdk/catalog";
 
-export const LockerDetails = () => {
+export const LockerDetails = ({ locker }: { locker: Locker }) => {
   return (
     <Box my="md">
       <Box>
@@ -20,9 +21,8 @@ export const LockerDetails = () => {
             </Stack>
           </Group>
 
-          <VerticalKeyValuePair label="First Name" value="Joshua" />
-          <VerticalKeyValuePair label="Last Name" value="Nwafor" />
-          <VerticalKeyValuePair label="Middle Name" value="Chukwudi" />
+          <VerticalKeyValuePair label="First Name" value={locker.first_name} />
+          <VerticalKeyValuePair label="Last Name" value={locker.last_name} />
           <VerticalKeyValuePair label="School" value="University of Jos" />
         </Stack>
       </Box>

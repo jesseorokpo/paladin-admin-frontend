@@ -8,6 +8,7 @@ import {
 } from "@mantine/nprogress";
 import { handleAxiosError } from "../../utils";
 import { authManager } from "./auth";
+import { authController } from "../../config/sdk";
 
 class LoginManager {
   //@ts-ignore
@@ -19,9 +20,8 @@ class LoginManager {
   async login(request: LoginDto) {
     try {
       startNavigationProgress();
-      let response = await new AuthApi().authControllerLogin(request);
-      authManager.dummyLogin()
-      console.log(response.data);
+      let response = await authController.authControllerLogin(request);
+      authManager.initAccountToken(response.data.token);
       completeNavigationProgress();
     } catch (err) {
       let message = handleAxiosError(err);

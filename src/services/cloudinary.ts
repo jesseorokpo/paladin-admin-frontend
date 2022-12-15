@@ -1,3 +1,8 @@
+import {
+  resetNavigationProgress,
+  startNavigationProgress,
+} from "@mantine/nprogress";
+
 const CLOUDINARY_ACCOUNT = "10xjoshua";
 const API_KEY = "353477697489967";
 const UPLOAD_IMAGE_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_ACCOUNT}/raw/upload`;
@@ -23,11 +28,14 @@ async function UploadToCloudinary(
   formData.append("public_id", `file-${file.name}-${timeStamp}`);
   formData.append("upload_preset", "zip-upload");
 
+  startNavigationProgress();
   let response = await fetch(UPLOAD_IMAGE_URL, {
     method: "POST",
     mode: "cors",
     body: formData,
   });
+
+  resetNavigationProgress();
 
   let data = await response.json();
 

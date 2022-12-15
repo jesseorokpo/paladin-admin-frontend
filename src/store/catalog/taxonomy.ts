@@ -1,9 +1,6 @@
-import { runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { productApiController, taxonomyApiController } from "../../config/sdk";
 import {
-  Product,
-  PublishProductDto,
-  PublishProductDtoTypeEnum,
   PublishTaxonomyDto,
   Taxonomy,
   UpdateProductDto,
@@ -12,7 +9,9 @@ import {
 
 class Manager {
   items: Taxonomy[] = [];
-  constructor() {}
+  constructor() {
+    makeAutoObservable(this)
+  }
 
   loadItems() {
     taxonomyApiController.taxonomyControllerGet().then((payload) => {
@@ -51,6 +50,7 @@ class Manager {
         console.log(payload);
         runInAction(() => {
           this.items.push(payload.data);
+          this.items=[...this.items]
         });
       })
       .catch((err) => {

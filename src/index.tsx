@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./firebase-init";
 import "./index.css";
 import App from "./app/index";
 import reportWebVitals from "./reportWebVitals";

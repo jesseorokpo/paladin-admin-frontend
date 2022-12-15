@@ -20,9 +20,11 @@ import { uploadImage } from "@services/cloudinary";
 import { Edit2 } from "iconsax-react";
 import { productManager } from "@store/catalog/product";
 import { PublishProductDtoTypeEnum } from "../../../sdk/catalog";
+import { taxonomyManager } from "@store/catalog/taxonomy";
 
 export function NewProductProcess() {
   const [opened, setOpened] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const form = useForm({
     initialValues: {
@@ -111,14 +113,19 @@ export function NewProductProcess() {
               />
             </Grid.Col>
             <Grid.Col md={6}>
-              <Select label="Category" data={[]} />
+              <Select
+                label="Category"
+                data={taxonomyManager.items.map((element) => {
+                  //@ts-ignore
+                  return { value: element._id, label: element.name };
+                })}
+              />
             </Grid.Col>
           </Grid>
-
           <Box sx={{ height: 24 }} />
           <Grid>
             <Grid.Col span={12}>
-              <Button fullWidth type="submit">
+              <Button fullWidth type="submit" loading={loading}>
                 Create
               </Button>
             </Grid.Col>

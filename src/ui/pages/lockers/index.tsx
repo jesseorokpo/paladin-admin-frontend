@@ -1,4 +1,5 @@
 import {
+  ActionIcon,
   Box,
   Button,
   Center,
@@ -8,42 +9,23 @@ import {
   Stack,
   Table,
   Title,
+  Text,
+  Avatar,
 } from "@mantine/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { formatCurrency } from "../../../utils";
+import { DataTable } from "mantine-datatable";
+import { orderManager } from "@store/catalog/order";
+import { ArrowDown2 } from "iconsax-react";
+import { lockerManager } from "@store/locker";
+import { useEffect } from "react";
+import { observer } from "mobx-react";
 
-export default function LockersScreen() {
-  const rows = [1, 2, 3, 4, 4].map((element) => (
-    <tr
-      key={element}
-      style={{
-        border: "0px solid black",
-        alignItems: "flex-start",
-        alignContent: "flex-start",
-      }}
-    >
-      <td>{"#12345"}</td>
-      <td>
-        <div>{`Joshua Nwafor`}</div>
-        <div>{`Owner Id`}</div>
-      </td>
-      <td>{"LOGISS"}</td>
-      <td>{"03-Sep-2022"}</td>
-      <td>
-        <div>{"(10) Items"}</div>
-        <div>{formatCurrency(1000)}</div>
-      </td>
-      <td>
-        <Center>
-          <Link to={"/lockers/locker"}>
-            <Button variant="outline" size="sm">
-              View
-            </Button>
-          </Link>
-        </Center>
-      </td>
-    </tr>
-  ));
+export default observer(function LockersScreen() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    lockerManager.loadItems();
+  }, []);
 
   return (
     <Box style={{ overflow: "hidden !important" }} mt="xl">
@@ -64,28 +46,86 @@ export default function LockersScreen() {
                 data={[
                   { label: "All Lockers", value: "all" },
                   { label: "Active", value: "active" },
-                  { label: "Blocked", value: "blocked" },
-                  { label: "Pending", value: "pending" },
                 ]}
               />
             </Group>
 
-            <Table border={0}>
-              <thead>
-                <tr>
-                  <th>PID</th>
-                  <th>Profile</th>
-                  <th>School</th>
-                  <th>Last Used</th>
-                  <th>Items</th>
-                  <th style={{ textAlign: "center" }}>Active</th>
-                </tr>
-              </thead>
-              <tbody>{rows}</tbody>
-            </Table>
+            <DataTable
+              height={500}
+              striped={false}
+              withColumnBorders
+              style={{ background: "ghostwhite", paddingTop: 0 }}
+              verticalSpacing="md"
+              noRecordsIcon={true}
+              borderRadius="xs"
+              records={lockerManager.items}
+              withBorder={false}
+              columns={[
+                {
+                  accessor: "id",
+                  title: "#",
+                  textAlignment: "center",
+                  width: 50,
+                  render: ({}) => (
+                    <Group position="center">
+                      <Box
+                        sx={{ width: 10, height: 10, background: "gray" }}
+                      ></Box>
+                    </Group>
+                  ),
+                },
+                {
+                  accessor: "photo",
+                  title: "Photo",
+                  width: 100,
+                  render: () => {
+                    return <Avatar size={"lg"} />;
+                  },
+                },
+                {
+                  accessor: "pid",
+                  title: "PID",
+                },
+                {
+                  accessor: "fullname",
+                  title: "Profile",
+                  render: (props) => {
+                    console.log(props);
+                    return (
+                      <Text>
+                        {props.first_name} {props.last_name}
+                      </Text>
+                    );
+                  },
+                },
+                {
+                  accessor: "status",
+                  title: "Status",
+                },
+                {
+                  accessor: "*",
+                  title: "Action",
+                  width: 100,
+                  render: (props) => {
+                    return (
+                      <Button
+                        variant="subtle"
+                        onClick={() => {
+                          console.log(props);
+                          //@ts-ignore
+                          navigate(`/lockers/${props?._id}`);
+                        }}
+                      >
+                        Viewd
+                      </Button>
+                    );
+                  },
+                },
+              ]}
+            />
           </Stack>
         </Paper>
       </Stack>
     </Box>
   );
-}
+});

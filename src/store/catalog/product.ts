@@ -1,4 +1,4 @@
-import { runInAction } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import { productApiController } from "../../config/sdk";
 import {
   Product,
@@ -9,26 +9,31 @@ import {
 
 class Manager {
   items: Product[] = [];
-  constructor() {}
+  constructor() {
+    makeAutoObservable(this);
+  }
 
   loadItems() {
-    productApiController.productControllerGet().then((payload) => {
-      console.log(payload)
-      runInAction(() => {
-        this.items = payload.data??[];
+    productApiController
+      .productControllerGet()
+      .then((payload) => {
+        console.log(payload);
+        runInAction(() => {
+          this.items = payload.data ?? [];
+        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }).catch(err=>{
-      console.log(err);
-    });
   }
 
   deleteItem(id: string) {
-    console.log("deleting item")
+    console.log("deleting item");
     productApiController.productControllerDeleteItem(id).then((payload) => {
       runInAction(() => {
         // @ts-ignore
         this.items = this.items.filter((element) => element._id != id);
-        this.loadItems()
+        this.loadItems();
       });
     });
   }
@@ -45,19 +50,19 @@ class Manager {
       });
   }
 
-  publishItem(payload: PublishProductDto) {
+  async publishItem(payload: PublishProductDto) {
     payload.type = PublishProductDtoTypeEnum.Digital;
-    productApiController
-      .productControllerPublish(payload)
-      .then((payload) => {
-        runInAction(() => {
-          this.items.push(payload.data);
-        });
-      })
-      .catch((err) => {
-        //@ts-ignore
-        console.log(err.response);
+    try {
+      let response = await productApiController.productControllerPublish(
+        payload
+      );
+      runInAction(() => {
+        this.items.push(response.data);
+        this.items = [...this.items];
       });
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

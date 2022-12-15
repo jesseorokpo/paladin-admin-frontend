@@ -24,6 +24,55 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface AttachAccountDto
+ */
+export interface AttachAccountDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'business_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'settlement_bank': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'account_number': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AttachAccountDto
+     */
+    'percentage_charge': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'primary_contact_email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'primary_contact_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'primary_contact_phone': string;
+}
+/**
+ * 
+ * @export
  * @interface AuthenticatedUser
  */
 export interface AuthenticatedUser {
@@ -194,6 +243,36 @@ export interface UserPublicData {
      * @type {string}
      * @memberof UserPublicData
      */
+    'photo': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserPublicData
+     */
+    'bio': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserPublicData
+     */
+    'first_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserPublicData
+     */
+    'last_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserPublicData
+     */
+    'phone': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserPublicData
+     */
     'email': string;
     /**
      * 
@@ -201,30 +280,6 @@ export interface UserPublicData {
      * @memberof UserPublicData
      */
     'isActive': boolean;
-    /**
-     * 
-     * @type {object}
-     * @memberof UserPublicData
-     */
-    'paystack_int': object;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserPublicData
-     */
-    'subscription_plan': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserPublicData
-     */
-    'subscription_status': string;
-    /**
-     * 
-     * @type {object}
-     * @memberof UserPublicData
-     */
-    'subscription_transaction': object;
 }
 
 /**
@@ -268,6 +323,45 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {AttachAccountDto} attachAccountDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerAttachBankAccount: async (attachAccountDto: AttachAccountDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'attachAccountDto' is not null or undefined
+            assertParamExists('authControllerAttachBankAccount', 'attachAccountDto', attachAccountDto)
+            const localVarPath = `/api/auth/me/attach-bankaccount`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(attachAccountDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -356,6 +450,45 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             // verify required parameter 'loginDto' is not null or undefined
             assertParamExists('authControllerLogin', 'loginDto', loginDto)
             const localVarPath = `/api/auth/login`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(loginDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {LoginDto} loginDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerLoginAgent: async (loginDto: LoginDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'loginDto' is not null or undefined
+            assertParamExists('authControllerLoginAgent', 'loginDto', loginDto)
+            const localVarPath = `/api/auth/login-admin`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -498,14 +631,53 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {SignUpDto} signUpDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerSignupAdmin: async (signUpDto: SignUpDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'signUpDto' is not null or undefined
+            assertParamExists('authControllerSignupAdmin', 'signUpDto', signUpDto)
+            const localVarPath = `/api/auth/signup-admin`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(signUpDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {SignUpOrgDto} signUpOrgDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerSignupOrg: async (signUpOrgDto: SignUpOrgDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        authControllerSignupAgent: async (signUpOrgDto: SignUpOrgDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'signUpOrgDto' is not null or undefined
-            assertParamExists('authControllerSignupOrg', 'signUpOrgDto', signUpOrgDto)
-            const localVarPath = `/api/auth/signup-org`;
+            assertParamExists('authControllerSignupAgent', 'signUpOrgDto', signUpOrgDto)
+            const localVarPath = `/api/auth/signup-agent`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -558,6 +730,16 @@ export const AuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {AttachAccountDto} attachAccountDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerAttachBankAccount(attachAccountDto: AttachAccountDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerAttachBankAccount(attachAccountDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {ForgottenPasswordDto} forgottenPasswordDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -583,6 +765,16 @@ export const AuthApiFp = function(configuration?: Configuration) {
          */
         async authControllerLogin(loginDto: LoginDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticatedUser>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerLogin(loginDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {LoginDto} loginDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerLoginAgent(loginDto: LoginDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticatedUser>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerLoginAgent(loginDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -616,12 +808,22 @@ export const AuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {SignUpDto} signUpDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authControllerSignupAdmin(signUpDto: SignUpDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticatedUser>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerSignupAdmin(signUpDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {SignUpOrgDto} signUpOrgDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerSignupOrg(signUpOrgDto: SignUpOrgDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticatedUser>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerSignupOrg(signUpOrgDto, options);
+        async authControllerSignupAgent(signUpOrgDto: SignUpOrgDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticatedUser>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerSignupAgent(signUpOrgDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -643,6 +845,15 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          */
         authControllerActivate(userId: string, activationToken: string, options?: any): AxiosPromise<void> {
             return localVarFp.authControllerActivate(userId, activationToken, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {AttachAccountDto} attachAccountDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerAttachBankAccount(attachAccountDto: AttachAccountDto, options?: any): AxiosPromise<void> {
+            return localVarFp.authControllerAttachBankAccount(attachAccountDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -672,6 +883,15 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {LoginDto} loginDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerLoginAgent(loginDto: LoginDto, options?: any): AxiosPromise<AuthenticatedUser> {
+            return localVarFp.authControllerLoginAgent(loginDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -698,12 +918,21 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {SignUpDto} signUpDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authControllerSignupAdmin(signUpDto: SignUpDto, options?: any): AxiosPromise<AuthenticatedUser> {
+            return localVarFp.authControllerSignupAdmin(signUpDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {SignUpOrgDto} signUpOrgDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerSignupOrg(signUpOrgDto: SignUpOrgDto, options?: any): AxiosPromise<AuthenticatedUser> {
-            return localVarFp.authControllerSignupOrg(signUpOrgDto, options).then((request) => request(axios, basePath));
+        authControllerSignupAgent(signUpOrgDto: SignUpOrgDto, options?: any): AxiosPromise<AuthenticatedUser> {
+            return localVarFp.authControllerSignupAgent(signUpOrgDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -725,6 +954,17 @@ export class AuthApi extends BaseAPI {
      */
     public authControllerActivate(userId: string, activationToken: string, options?: AxiosRequestConfig) {
         return AuthApiFp(this.configuration).authControllerActivate(userId, activationToken, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {AttachAccountDto} attachAccountDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authControllerAttachBankAccount(attachAccountDto: AttachAccountDto, options?: AxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authControllerAttachBankAccount(attachAccountDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -761,6 +1001,17 @@ export class AuthApi extends BaseAPI {
 
     /**
      * 
+     * @param {LoginDto} loginDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authControllerLoginAgent(loginDto: LoginDto, options?: AxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authControllerLoginAgent(loginDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
@@ -793,13 +1044,24 @@ export class AuthApi extends BaseAPI {
 
     /**
      * 
+     * @param {SignUpDto} signUpDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authControllerSignupAdmin(signUpDto: SignUpDto, options?: AxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authControllerSignupAdmin(signUpDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {SignUpOrgDto} signUpOrgDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public authControllerSignupOrg(signUpOrgDto: SignUpOrgDto, options?: AxiosRequestConfig) {
-        return AuthApiFp(this.configuration).authControllerSignupOrg(signUpOrgDto, options).then((request) => request(this.axios, this.basePath));
+    public authControllerSignupAgent(signUpOrgDto: SignUpOrgDto, options?: AxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authControllerSignupAgent(signUpOrgDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
