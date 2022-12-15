@@ -1,23 +1,20 @@
 import {
-  ActionIcon,
   Avatar,
   Box,
-  Button,
-  Center,
   Divider,
   Group,
   Input,
   Paper,
   Stack,
-  Table,
   Title,
+  Text,
 } from "@mantine/core";
-import { productManager } from "@store/catalog/product";
-import { NewUserProcess } from "@ui/organisms/processes/new-user-process";
-import { ArrowDown2 } from "iconsax-react";
+import { usersManager } from "@store/users";
+import { NewAdminProcess } from "@ui/organisms/processes/new-admin-process";
 import { DataTable } from "mantine-datatable";
+import { observer } from "mobx-react";
 
-export default function SystemUsersScreen() {
+export default observer(function SystemUsersScreen() {
   return (
     <Box style={{ overflow: "hidden !important" }} mt="xl">
       <Stack>
@@ -31,11 +28,11 @@ export default function SystemUsersScreen() {
           <Stack>
             <Group position="apart">
               <Box>
-                <Title sx={{ fontSize: 24 }}>System users (19)</Title>
+                <Title sx={{ fontSize: 24 }}>System users</Title>
               </Box>
               <Group>
                 <Input radius={"xl"} placeholder="Search Customer" />
-                <NewUserProcess />
+                <NewAdminProcess />
               </Group>
             </Group>
 
@@ -49,20 +46,8 @@ export default function SystemUsersScreen() {
               verticalSpacing="md"
               noRecordsIcon={true}
               borderRadius="xs"
-              records={[]}
+              records={usersManager.admins}
               withBorder={false}
-              rowExpansion={{
-                allowMultiple: true,
-                content: (props) => {
-                  return (
-                    <Box p="md">
-                      <Box px="12px" sx={{ background: "ghostwhite" }}>
-                        {/* <Expand product={props.record} /> */}
-                      </Box>
-                    </Box>
-                  );
-                },
-              }}
               columns={[
                 {
                   accessor: "id",
@@ -80,11 +65,18 @@ export default function SystemUsersScreen() {
                 {
                   accessor: "image",
                   title: "Image",
-                  render: ({ image }) => <Avatar src={image ?? ""} />,
+                  render: ({ photo }) => <Avatar src={photo ?? ""} />,
                 },
                 {
                   accessor: "name",
                   title: "Fullname",
+                  render: ({ first_name, last_name }) => {
+                    return (
+                      <Text>
+                        {first_name} {last_name}
+                      </Text>
+                    );
+                  },
                 },
                 {
                   accessor: "phone",
@@ -98,18 +90,6 @@ export default function SystemUsersScreen() {
                   accessor: "status",
                   title: "Active",
                 },
-                {
-                  accessor: "d",
-                  title: "Action",
-                  width: 100,
-                  render: ({}) => (
-                    <Group>
-                      <ActionIcon>
-                        <ArrowDown2 variant="Bold" />
-                      </ActionIcon>
-                    </Group>
-                  ),
-                },
               ]}
             />
           </Stack>
@@ -117,4 +97,4 @@ export default function SystemUsersScreen() {
       </Stack>
     </Box>
   );
-}
+});

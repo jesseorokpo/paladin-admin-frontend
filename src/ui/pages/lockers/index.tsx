@@ -116,7 +116,7 @@ export default observer(function LockersScreen() {
                           navigate(`/lockers/${props?._id}`);
                         }}
                       >
-                        Viewd
+                        View
                       </Button>
                     );
                   },

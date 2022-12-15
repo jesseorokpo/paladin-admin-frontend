@@ -1,36 +1,133 @@
-import { Box, Button, Center, Table } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Button,
+  Center,
+  Divider,
+  Grid,
+  Group,
+  Stack,
+  Table,
+  Text,
+} from "@mantine/core";
+import { VerticalKeyValuePair } from "@ui/molecules/text";
+import { ArrowDown2 } from "iconsax-react";
+import { DataTable } from "mantine-datatable";
+import { Order } from "../../../../sdk/catalog";
+import { formatCurrency } from "../../../../utils";
 
-export const RenderOrders = ({ items }: { items: any[] }) => {
-  const rows = items.map((element) => (
-    <tr key={element} style={{ border: "0px solid black" }}>
-      <td>{"449012246AD"}</td>
-      <td>{"#1234"}</td>
-      <td>{"03-Sep-2022"}</td>
-      <td>{"132,000"}</td>
-      <td>
-        <Center>
-          <Button variant="outline" size="sm">
-            View
-          </Button>
-        </Center>
-      </td>
-    </tr>
-  ));
-
+export const RenderOrders = ({ items }: { items: Order[] }) => {
   return (
     <Box>
-      <Table border={0}>
-        <thead>
-          <tr>
-            <th>Invoice ID</th>
-            <th>Locker ID</th>
-            <th>Payment Date</th>
-            <th>Amount (N)</th>
-            <th style={{ textAlign: "center" }}>Active</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </Table>
+      <DataTable
+        height={500}
+        striped={false}
+        withColumnBorders
+        style={{ background: "ghostwhite", paddingTop: 0 }}
+        verticalSpacing="md"
+        noRecordsIcon={true}
+        borderRadius="xs"
+        records={items}
+        withBorder={false}
+        rowExpansion={{
+          allowMultiple: true,
+          content: (props) => {
+            let data = props.record;
+            return (
+              <Box p="md" key={props.recordIndex}>
+                <Box p="md" sx={{ background: "ghostwhite" }}>
+                  <Stack>
+                    <Grid>
+                      <Grid.Col md={4}>
+                        <VerticalKeyValuePair
+                          label="Status"
+                          value={`${data.status}`}
+                        />
+                      </Grid.Col>
+                      <Grid.Col md={4}>
+                        <VerticalKeyValuePair
+                          label="Created At"
+                          value={`${new Date(data.updated_at).toDateString()}`}
+                        />
+                      </Grid.Col>
+                      <Grid.Col md={4}>
+                        <VerticalKeyValuePair
+                          label="Update At"
+                          value={`${new Date(data.created_at).toDateString()}`}
+                        />
+                      </Grid.Col>
+                    </Grid>
+                    <Box>
+                      <Text color="gray">Items</Text>
+                      {props.record.items.map((element) => {
+                        return (
+                          <Text>
+                            {element.product_name} X {element.quantity}{" "}
+                          </Text>
+                        );
+                      })}
+                    </Box>
+                  </Stack>
+                </Box>
+              </Box>
+            );
+          },
+        }}
+        columns={[
+          {
+            accessor: "id",
+            title: "#",
+            textAlignment: "center",
+            width: 50,
+            render: ({}) => (
+              <Group position="center">
+                <Box sx={{ width: 10, height: 10, background: "gray" }}></Box>
+              </Group>
+            ),
+          },
+          {
+            accessor: "name",
+            title: "Items Purchased",
+            render: ({ items }) => {
+              return (
+                <Text>
+                  {items[0].product_name} and {items.length - 1} more
+                </Text>
+              );
+            },
+          },
+          {
+            accessor: "sum_total",
+            title: "Total",
+            render: ({
+              //@ts-ignore
+              sum_total,
+            }) => {
+              return <Text>{formatCurrency(sum_total)}</Text>;
+            },
+          },
+          {
+            accessor: "status",
+            title: "Status",
+          },
+          {
+            accessor: "payment_status",
+            title: "Payment",
+          },
+          {
+            accessor: "d",
+            title: "Action",
+            width: 100,
+            render: ({}) => (
+              <Group>
+                <ActionIcon>
+                  <ArrowDown2 variant="Bold" />
+                </ActionIcon>
+              </Group>
+            ),
+          },
+        ]}
+      />
     </Box>
   );
 };

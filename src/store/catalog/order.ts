@@ -9,14 +9,16 @@ class Manager {
   }
 
   loadItems() {
-    orderControllerApi.orderControllerGetOrderAdmin().then((payload) => {
-      runInAction(() => {
-        this.items = payload.data;
-      });
-    });
+    orderControllerApi
+      .orderControllerGetOrderAdmin()
+      .then((payload) => {
+        console.log(payload);
+        runInAction(() => {
+          this.items = payload.data;
+        });
+      })
+      .catch(console.log);
   }
-
-
 }
 
 export const orderManager = new Manager();

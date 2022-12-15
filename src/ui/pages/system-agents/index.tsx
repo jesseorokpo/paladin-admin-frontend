@@ -13,17 +13,18 @@ import {
   Stack,
   Table,
   Title,
+  Text,
 } from "@mantine/core";
 import { productManager } from "@store/catalog/product";
 import { usersManager } from "@store/users";
 import { NewAgentProcess } from "@ui/organisms/processes/new-agent-process";
-import { NewUserProcess } from "@ui/organisms/processes/new-user-process";
-import { ArrowDown2 } from "iconsax-react";
+
 import { DataTable } from "mantine-datatable";
 import { observer } from "mobx-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default observer(function SystemAgentsScreen() {
+  const navigate = useNavigate();
   return (
     <Box style={{ overflow: "hidden !important" }} mt="xl">
       <Stack>
@@ -37,7 +38,7 @@ export default observer(function SystemAgentsScreen() {
           <Stack>
             <Group position="apart">
               <Box>
-                <Title sx={{ fontSize: 24 }}>System Agents (19)</Title>
+                <Title sx={{ fontSize: 24 }}>System Agents</Title>
               </Box>
               <Group>
                 <Input radius={"xl"} placeholder="Search Customer" />
@@ -67,18 +68,6 @@ export default observer(function SystemAgentsScreen() {
               borderRadius="xs"
               records={usersManager.agents}
               withBorder={false}
-              rowExpansion={{
-                allowMultiple: true,
-                content: (props) => {
-                  return (
-                    <Box p="md">
-                      <Box px="12px" sx={{ background: "ghostwhite" }}>
-                        {/* <Expand product={props.record} /> */}
-                      </Box>
-                    </Box>
-                  );
-                },
-              }}
               columns={[
                 {
                   accessor: "id",
@@ -101,6 +90,13 @@ export default observer(function SystemAgentsScreen() {
                 {
                   accessor: "name",
                   title: "Fullname",
+                  render: ({ first_name, last_name }) => {
+                    return (
+                      <Text>
+                        {first_name} {last_name}
+                      </Text>
+                    );
+                  },
                 },
                 {
                   accessor: "phone",
@@ -118,13 +114,23 @@ export default observer(function SystemAgentsScreen() {
                   accessor: "d",
                   title: "Action",
                   width: 100,
-                  render: ({}) => (
-                    <Group>
-                      <ActionIcon>
-                        <ArrowDown2 variant="Bold" />
-                      </ActionIcon>
-                    </Group>
-                  ),
+                  render: (props) => {
+                    return (
+                      <Button
+                        variant="subtle"
+                        onClick={
+                          //@ts-ignore
+                          () => {
+                            console.log(props);
+                            //@ts-ignore
+                            navigate(`/agents/${props?._id}`);
+                          }
+                        }
+                      >
+                        View
+                      </Button>
+                    );
+                  },
                 },
               ]}
             />
