@@ -8,14 +8,21 @@ import {
   Paper,
   Stack,
   Table,
+  Text,
   Title,
 } from "@mantine/core";
 import { productManager } from "@store/catalog/product";
+import { usersManager } from "@store/users";
 import { ArrowDown2 } from "iconsax-react";
 import { DataTable } from "mantine-datatable";
+import { observer } from "mobx-react";
+import { useEffect } from "react";
 import { Expand } from "../store/products/Expand";
 
-export default function CustomersScreen() {
+export default observer(function CustomersScreen() {
+  useEffect(() => {
+    usersManager.loadItems();
+  }, []);
   return (
     <Box style={{ overflow: "hidden !important" }} mt="xl">
       <Stack>
@@ -44,7 +51,7 @@ export default function CustomersScreen() {
               verticalSpacing="md"
               noRecordsIcon={true}
               borderRadius="xs"
-              records={productManager.items}
+              records={usersManager.individuals}
               withBorder={false}
               rowExpansion={{
                 allowMultiple: true,
@@ -75,11 +82,18 @@ export default function CustomersScreen() {
                 {
                   accessor: "image",
                   title: "Image",
-                  render: ({ image }) => <Avatar src={image ?? ""} />,
+                  render: ({ photo }) => <Avatar src={photo ?? ""} />,
                 },
                 {
                   accessor: "name",
                   title: "Fullname",
+                  render: ({ first_name, last_name }) => {
+                    return (
+                      <Text>
+                        {first_name} {last_name}
+                      </Text>
+                    );
+                  },
                 },
                 {
                   accessor: "phone",
@@ -112,4 +126,4 @@ export default function CustomersScreen() {
       </Stack>
     </Box>
   );
-}
+});

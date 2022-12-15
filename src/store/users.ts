@@ -1,7 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import {
-  usersControllerApi,
-} from "../config/sdk";
+import { usersControllerApi } from "../config/sdk";
 import { User } from "../sdk/catalog";
 
 class Manager {

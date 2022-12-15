@@ -15,12 +15,15 @@ import {
   Title,
 } from "@mantine/core";
 import { productManager } from "@store/catalog/product";
+import { usersManager } from "@store/users";
+import { NewAgentProcess } from "@ui/organisms/processes/new-agent-process";
 import { NewUserProcess } from "@ui/organisms/processes/new-user-process";
 import { ArrowDown2 } from "iconsax-react";
 import { DataTable } from "mantine-datatable";
+import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
 
-export default function SystemAgentsScreen() {
+export default observer(function SystemAgentsScreen() {
   return (
     <Box style={{ overflow: "hidden !important" }} mt="xl">
       <Stack>
@@ -38,7 +41,7 @@ export default function SystemAgentsScreen() {
               </Box>
               <Group>
                 <Input radius={"xl"} placeholder="Search Customer" />
-                <NewUserProcess />
+                <NewAgentProcess />
               </Group>
             </Group>
             <Group position="apart">
@@ -46,7 +49,6 @@ export default function SystemAgentsScreen() {
                 data={[
                   { label: "All Agents", value: "react" },
                   { label: "Active", value: "ng" },
-                  { label: "Disabled", value: "svelte" },
                   { label: "Blocked", value: "vue" },
                 ]}
               />
@@ -63,7 +65,7 @@ export default function SystemAgentsScreen() {
               verticalSpacing="md"
               noRecordsIcon={true}
               borderRadius="xs"
-              records={[]}
+              records={usersManager.agents}
               withBorder={false}
               rowExpansion={{
                 allowMultiple: true,
@@ -94,7 +96,7 @@ export default function SystemAgentsScreen() {
                 {
                   accessor: "image",
                   title: "Image",
-                  render: ({ image }) => <Avatar src={image ?? ""} />,
+                  render: ({ photo }) => <Avatar src={photo ?? ""} />,
                 },
                 {
                   accessor: "name",
@@ -131,4 +133,4 @@ export default function SystemAgentsScreen() {
       </Stack>
     </Box>
   );
-}
+});

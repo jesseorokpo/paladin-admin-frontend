@@ -65,7 +65,7 @@ export default function LockerScreen() {
             <Group position="apart">
               <Box>
                 <Title sx={{ fontSize: 24 }}>Locker</Title>
-                <Text>#123456</Text>
+                <Text>{locker.pid}</Text>
               </Box>
 
               <Group>
