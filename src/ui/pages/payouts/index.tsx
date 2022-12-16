@@ -1,10 +1,9 @@
 import {
+  ActionIcon,
   Avatar,
   Box,
-  Button,
-  Checkbox,
+
   Group,
-  Input,
   Paper,
   SegmentedControl,
   Stack,
@@ -12,7 +11,8 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { RenderPayoutRequests } from "@ui/organisms/renderers/payout-requests/RenderPayoutRequests";
+import { ArrowDown2 } from "iconsax-react";
+import { DataTable } from "mantine-datatable";
 
 export default function PayoutsScreen() {
   return (
@@ -51,7 +51,76 @@ export default function PayoutsScreen() {
                 />
               </Group>
 
-              <RenderPayoutRequests requests={[1, 2, 3, 4, 1, 2, 3, 4]} />
+              <DataTable
+                height={500}
+                striped={false}
+                withColumnBorders
+                style={{ background: "ghostwhite", paddingTop: 0 }}
+                verticalSpacing="md"
+                noRecordsIcon={true}
+                borderRadius="xs"
+                // records={payoutManager.items}
+                rowExpansion={{
+                  allowMultiple: true,
+                  content: (props) => {
+                    let data = props.record;
+                    return (
+                      <Box p="md" key={props.recordIndex}>
+                        <Box p="md" sx={{ background: "ghostwhite" }}></Box>
+                      </Box>
+                    );
+                  },
+                }}
+                records={[{}, {}]}
+                withBorder={false}
+                columns={[
+                  {
+                    accessor: "id",
+                    title: "#",
+                    textAlignment: "center",
+                    width: 50,
+                    render: ({}) => (
+                      <Group position="center">
+                        <Box
+                          sx={{ width: 10, height: 10, background: "gray" }}
+                        ></Box>
+                      </Group>
+                    ),
+                  },
+                  {
+                    accessor: "photo",
+                    title: "Photo",
+                    width: 100,
+                    render: () => {
+                      return <Avatar size={"lg"} />;
+                    },
+                  },
+                  {
+                    accessor: "agent",
+                    title: "Agent",
+                  },
+                  {
+                    accessor: "items",
+                    title: "Item Summary",
+                  },
+                  {
+                    accessor: "items",
+                    title: "Total Amount",
+                  },
+                  {
+                    accessor: "*",
+                    title: "Action",
+                    width: 100,
+                    render: ({}) => (
+                      <Group>
+                        <ActionIcon>
+                          <ArrowDown2 variant="Bold" />
+                        </ActionIcon>
+                      </Group>
+                    ),
+                  },
+                ]}
+              />
             </Stack>
           </Stack>
         </Paper>
