@@ -3412,6 +3412,39 @@ export const PurchaseControllerApiAxiosParamCreator = function (configuration?: 
     return {
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/catalog/Purchase`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} item 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3453,7 +3486,7 @@ export const PurchaseControllerApiAxiosParamCreator = function (configuration?: 
          * @throws {RequiredError}
          */
         purchaseControllerGetPurchasesAdmin: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/catalog/Purchase`;
+            const localVarPath = `/api/catalog/Purchase/admin`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -3571,6 +3604,15 @@ export const PurchaseControllerApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async purchaseControllerGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Purchase>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.purchaseControllerGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {string} item 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3620,6 +3662,14 @@ export const PurchaseControllerApiFactory = function (configuration?: Configurat
     return {
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerGet(options?: any): AxiosPromise<Array<Purchase>> {
+            return localVarFp.purchaseControllerGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {string} item 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -3663,6 +3713,16 @@ export const PurchaseControllerApiFactory = function (configuration?: Configurat
  * @extends {BaseAPI}
  */
 export class PurchaseControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseControllerApi
+     */
+    public purchaseControllerGet(options?: AxiosRequestConfig) {
+        return PurchaseControllerApiFp(this.configuration).purchaseControllerGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {string} item 

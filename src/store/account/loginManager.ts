@@ -20,7 +20,7 @@ class LoginManager {
   async login(request: LoginDto) {
     try {
       startNavigationProgress();
-      let response = await authController.authControllerLogin(request);
+      let response = await authController.authControllerLoginAdmin(request);
       authManager.initAccountToken(response.data.token);
       completeNavigationProgress();
     } catch (err) {
