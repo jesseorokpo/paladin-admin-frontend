@@ -15,6 +15,7 @@ import {
   ActionIcon,
 } from "@mantine/core";
 import { IconNotification, IconSearch } from "@tabler/icons";
+import LogoLightSvgComponent from "@ui/svg/LogoLight";
 import {
   CardTick,
   Message,
@@ -56,7 +57,7 @@ const MainHeader: React.FC<{
           </Stack>
         </MediaQuery>
         <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-          <Box
+          <Group
             sx={(theme) => {
               return {
                 height: "100%",
@@ -68,8 +69,9 @@ const MainHeader: React.FC<{
             }}
             p="md"
           >
-            <Title size={"md"}>Paladin Admin</Title>
-          </Box>
+            <LogoLightSvgComponent height={30} style={{}} />
+            <Title size={"md"}>Admin</Title>
+          </Group>
         </MediaQuery>
         <Box p="md" sx={{ flex: 1 }}>
           <Group
@@ -82,12 +84,10 @@ const MainHeader: React.FC<{
               <Group>
                 <Link to={"/store"}>
                   <ActionIcon>
-                    <Shop color="whitesmoke" />
+                    <Shop />
                   </ActionIcon>
                 </Link>
-                <ActionIcon>
-                  <Notification color="whitesmoke" />
-                </ActionIcon>
+
                 <UserPrimaryActions />
               </Group>
             </Box>
@@ -100,37 +100,13 @@ const MainHeader: React.FC<{
 
 function UserPrimaryActions() {
   return (
-    <Menu width={"280px"}>
-      <Menu.Target>
-        <Avatar
-          src={
-            "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
-          }
-          size="md"
-          radius={"xl"}
-        />
-      </Menu.Target>
-      <Menu.Dropdown>
-        <Stack align={"center"} p="12px">
-          <Avatar
-            size={"lg"}
-            sx={{ borderRadius: 50 }}
-            src="https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg"
-          />
-          <Box sx={{ textAlign: "center", color: "gray" }}>
-            <Text sx={{ fontWeight: "bold" }}>Emekus Kalu</Text>
-            <Text>emekusenterprise@gmail.com</Text>
-          </Box>
-
-          <Group>
-            <Button variant="outline">Edit Profile</Button>
-            <Button variant="outline" color={"red"}>
-              Sign Out
-            </Button>
-          </Group>
-        </Stack>
-      </Menu.Dropdown>
-    </Menu>
+    <Avatar
+      src={
+        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
+      }
+      size="md"
+      radius={"xl"}
+    />
   );
 }
 

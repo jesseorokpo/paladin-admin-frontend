@@ -24,6 +24,43 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface AgentDetailedDto
+ */
+export interface AgentDetailedDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AgentDetailedDto
+     */
+    'totalPayouts': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AgentDetailedDto
+     */
+    'totalPayoutsWorth': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AgentDetailedDto
+     */
+    'totalPurchases': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AgentDetailedDto
+     */
+    'totalPurchasWorth': string;
+    /**
+     * 
+     * @type {Organization}
+     * @memberof AgentDetailedDto
+     */
+    'org': Organization;
+}
+/**
+ * 
+ * @export
  * @interface AttachAccountDto
  */
 export interface AttachAccountDto {
@@ -327,6 +364,18 @@ export interface Organization {
      * @memberof Organization
      */
     'paystack_int': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof Organization
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Organization
+     */
+    'updated_at': string;
 }
 /**
  * 
@@ -653,6 +702,12 @@ export interface Purchase {
     'items': Array<PurchaseItem>;
     /**
      * 
+     * @type {number}
+     * @memberof Purchase
+     */
+    'sum_total': number;
+    /**
+     * 
      * @type {string}
      * @memberof Purchase
      */
@@ -817,43 +872,7 @@ export interface UpdateOrganizationDto {
      * @type {string}
      * @memberof UpdateOrganizationDto
      */
-    'display_name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'handle': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'about': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'vision_statement': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'image': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'logo': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'cover': string;
+    'status': string;
 }
 /**
  * 
@@ -2132,14 +2151,18 @@ export const OrgControllerApiAxiosParamCreator = function (configuration?: Confi
     return {
         /**
          * 
+         * @param {string} item 
          * @param {AttachAccountDto} attachAccountDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orgControllerAttachBankAccount: async (attachAccountDto: AttachAccountDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        orgControllerAttachBankAccount: async (item: string, attachAccountDto: AttachAccountDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'item' is not null or undefined
+            assertParamExists('orgControllerAttachBankAccount', 'item', item)
             // verify required parameter 'attachAccountDto' is not null or undefined
             assertParamExists('orgControllerAttachBankAccount', 'attachAccountDto', attachAccountDto)
-            const localVarPath = `/api/catalog/org`;
+            const localVarPath = `/api/catalog/org/{item}`
+                .replace(`{${"item"}}`, encodeURIComponent(String(item)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2257,12 +2280,13 @@ export const OrgControllerApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} item 
          * @param {AttachAccountDto} attachAccountDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async orgControllerAttachBankAccount(attachAccountDto: AttachAccountDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerAttachBankAccount(attachAccountDto, options);
+        async orgControllerAttachBankAccount(item: string, attachAccountDto: AttachAccountDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerAttachBankAccount(item, attachAccountDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -2271,7 +2295,7 @@ export const OrgControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async orgControllerGetOrg(item: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async orgControllerGetOrg(item: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AgentDetailedDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerGetOrg(item, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2297,12 +2321,13 @@ export const OrgControllerApiFactory = function (configuration?: Configuration, 
     return {
         /**
          * 
+         * @param {string} item 
          * @param {AttachAccountDto} attachAccountDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orgControllerAttachBankAccount(attachAccountDto: AttachAccountDto, options?: any): AxiosPromise<Organization> {
-            return localVarFp.orgControllerAttachBankAccount(attachAccountDto, options).then((request) => request(axios, basePath));
+        orgControllerAttachBankAccount(item: string, attachAccountDto: AttachAccountDto, options?: any): AxiosPromise<Organization> {
+            return localVarFp.orgControllerAttachBankAccount(item, attachAccountDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2310,7 +2335,7 @@ export const OrgControllerApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orgControllerGetOrg(item: string, options?: any): AxiosPromise<void> {
+        orgControllerGetOrg(item: string, options?: any): AxiosPromise<AgentDetailedDto> {
             return localVarFp.orgControllerGetOrg(item, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2334,13 +2359,14 @@ export const OrgControllerApiFactory = function (configuration?: Configuration, 
 export class OrgControllerApi extends BaseAPI {
     /**
      * 
+     * @param {string} item 
      * @param {AttachAccountDto} attachAccountDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrgControllerApi
      */
-    public orgControllerAttachBankAccount(attachAccountDto: AttachAccountDto, options?: AxiosRequestConfig) {
-        return OrgControllerApiFp(this.configuration).orgControllerAttachBankAccount(attachAccountDto, options).then((request) => request(this.axios, this.basePath));
+    public orgControllerAttachBankAccount(item: string, attachAccountDto: AttachAccountDto, options?: AxiosRequestConfig) {
+        return OrgControllerApiFp(this.configuration).orgControllerAttachBankAccount(item, attachAccountDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

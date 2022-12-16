@@ -19,4 +19,6 @@ export function useUtilsLoader() {
   useEffect(() => {
     load();
   }, []);
+
+  return {load}
 }

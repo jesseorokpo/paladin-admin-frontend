@@ -8,6 +8,7 @@ import {
   PayoutsControllerApi,
   UsersControllerApi,
   PurchaseControllerApi,
+  OrgControllerApi,
 } from "../sdk/catalog";
 
 let config = {
@@ -53,6 +54,12 @@ export let payoutsControllerApi = new PayoutsControllerApi(
   axiosConfig
 );
 
+export let orgControllerApi = new OrgControllerApi(
+  config,
+  undefined,
+  axiosConfig
+);
+
 export let purchaseControllerApi = new PurchaseControllerApi(
   config,
   undefined,
@@ -77,6 +84,8 @@ export function configureClientSDK(token: string) {
   lockerApiController = new LockerApi(config, undefined, axiosConfig);
   orderControllerApi = new OrderControllerApi(config, undefined, axiosConfig);
   authController = new AuthApi(config, undefined, axiosConfig);
+
+  orgControllerApi = new OrgControllerApi(config, undefined, axiosConfig);
 
   payoutsControllerApi = new PayoutsControllerApi(
     config,

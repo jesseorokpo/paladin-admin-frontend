@@ -16,8 +16,14 @@ import AgentScreen from "@ui/pages/agent";
 import PayoutsScreen from "@ui/pages/payouts";
 import ProductsScreen from "@ui/pages/store/products";
 import CategoriesScreen from "@ui/pages/store/categories";
+import { useEffect } from "react";
+import { useUtilsLoader } from "../../hooks/loader";
 
 export default function MainAppRoutes() {
+  let { load } = useUtilsLoader();
+
+  useEffect(() => {}, []);
+
   return (
     <Routes>
       <Route path="" element={<AccountNavigationShell />}>
