@@ -36,10 +36,6 @@ const MainAppNavigation: React.FC<{
       <Navbar.Section className={classes.footer}>
         <Stack pl="4px">
           <Group>
-            <MessageQuestion size={18} variant="Bold" />{" "}
-            <Text size={"sm"}>Support</Text>
-          </Group>
-          <Group>
             <Logout size={18} variant="Bold" /> <Text size={"sm"}>Log out</Text>
           </Group>
         </Stack>
