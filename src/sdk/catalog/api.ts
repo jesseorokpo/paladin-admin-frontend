@@ -24,6 +24,68 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface AttachAccountDto
+ */
+export interface AttachAccountDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'business_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'settlement_bank': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'account_number': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof AttachAccountDto
+     */
+    'percentage_charge': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'primary_contact_email': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'primary_contact_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AttachAccountDto
+     */
+    'primary_contact_phone': string;
+}
+/**
+ * 
+ * @export
+ * @interface AuthenticatedLocker
+ */
+export interface AuthenticatedLocker {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthenticatedLocker
+     */
+    'token': string;
+}
+/**
+ * 
+ * @export
  * @interface Locker
  */
 export interface Locker {
@@ -81,6 +143,31 @@ export interface Locker {
      * @memberof Locker
      */
     'pin': string;
+}
+/**
+ * 
+ * @export
+ * @interface LoginLockerDto
+ */
+export interface LoginLockerDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginLockerDto
+     */
+    'pid': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginLockerDto
+     */
+    'pin': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LoginLockerDto
+     */
+    'pos_id': string;
 }
 /**
  * 
@@ -234,6 +321,12 @@ export interface Organization {
      * @memberof Organization
      */
     'cover': string;
+    /**
+     * 
+     * @type {object}
+     * @memberof Organization
+     */
+    'paystack_int': object;
 }
 /**
  * 
@@ -241,18 +334,6 @@ export interface Organization {
  * @interface Payout
  */
 export interface Payout {
-    /**
-     * 
-     * @type {string}
-     * @memberof Payout
-     */
-    'type': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Payout
-     */
-    'visibility': string;
     /**
      * 
      * @type {string}
@@ -425,12 +506,6 @@ export interface PublishPayoutDto {
      * @type {string}
      * @memberof PublishPayoutDto
      */
-    'type': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PublishPayoutDto
-     */
     'notes': string;
 }
 /**
@@ -493,6 +568,25 @@ export type PublishProductDtoTypeEnum = typeof PublishProductDtoTypeEnum[keyof t
 /**
  * 
  * @export
+ * @interface PublishPurchaseDto
+ */
+export interface PublishPurchaseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof PublishPurchaseDto
+     */
+    'purchase_token': string;
+    /**
+     * 
+     * @type {Array<PurchaseItem>}
+     * @memberof PublishPurchaseDto
+     */
+    'items': Array<PurchaseItem>;
+}
+/**
+ * 
+ * @export
  * @interface PublishTaxonomyDto
  */
 export interface PublishTaxonomyDto {
@@ -538,6 +632,92 @@ export interface PublishTaxonomyDto {
      * @memberof PublishTaxonomyDto
      */
     'for'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface Purchase
+ */
+export interface Purchase {
+    /**
+     * agent id; agent through which purchase was made
+     * @type {string}
+     * @memberof Purchase
+     */
+    'publisher_id': string;
+    /**
+     * 
+     * @type {Array<PurchaseItem>}
+     * @memberof Purchase
+     */
+    'items': Array<PurchaseItem>;
+    /**
+     * 
+     * @type {string}
+     * @memberof Purchase
+     */
+    'status': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Purchase
+     */
+    'payout_requested': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Purchase
+     */
+    'payout_id': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Purchase
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Purchase
+     */
+    'updated_at': string;
+}
+/**
+ * 
+ * @export
+ * @interface PurchaseItem
+ */
+export interface PurchaseItem {
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseItem
+     */
+    'image': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseItem
+     */
+    'product_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PurchaseItem
+     */
+    'product_id': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PurchaseItem
+     */
+    'quantity': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PurchaseItem
+     */
+    'amount': number;
 }
 /**
  * 
@@ -616,15 +796,22 @@ export interface UpdateLockerDto {
 /**
  * 
  * @export
- * @interface UpdateOrganizationDto
+ * @interface UpdateLockerPinDto
  */
-export interface UpdateOrganizationDto {
+export interface UpdateLockerPinDto {
     /**
      * 
      * @type {string}
-     * @memberof UpdateOrganizationDto
+     * @memberof UpdateLockerPinDto
      */
-    'id': string;
+    'pin': string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateOrganizationDto
+ */
+export interface UpdateOrganizationDto {
     /**
      * 
      * @type {string}
@@ -649,42 +836,6 @@ export interface UpdateOrganizationDto {
      * @memberof UpdateOrganizationDto
      */
     'vision_statement': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'facebook_handle': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'twitter_handle': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'instagram_handle': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'youtube_handle': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'linkedin_handle': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateOrganizationDto
-     */
-    'website_handle': string;
     /**
      * 
      * @type {string}
@@ -865,6 +1016,12 @@ export interface User {
      * @memberof User
      */
     'phone': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    'status': string;
     /**
      * 
      * @type {string}
@@ -1102,6 +1259,45 @@ export const LockerApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @param {LoginLockerDto} loginLockerDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        lockerControllerLoginLocker: async (loginLockerDto: LoginLockerDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'loginLockerDto' is not null or undefined
+            assertParamExists('lockerControllerLoginLocker', 'loginLockerDto', loginLockerDto)
+            const localVarPath = `/api/catalog/Lockers/login-locker`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(loginLockerDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {PublishLockerDto} publishLockerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1133,6 +1329,52 @@ export const LockerApiAxiosParamCreator = function (configuration?: Configuratio
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(publishLockerDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateLockerPinDto} updateLockerPinDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        lockerControllerResetLockerPassword: async (id: string, updateLockerPinDto: UpdateLockerPinDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('lockerControllerResetLockerPassword', 'id', id)
+            // verify required parameter 'updateLockerPinDto' is not null or undefined
+            assertParamExists('lockerControllerResetLockerPassword', 'updateLockerPinDto', updateLockerPinDto)
+            const localVarPath = `/api/catalog/Lockers/reset-locker-password`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateLockerPinDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1232,12 +1474,33 @@ export const LockerApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {LoginLockerDto} loginLockerDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async lockerControllerLoginLocker(loginLockerDto: LoginLockerDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticatedLocker>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.lockerControllerLoginLocker(loginLockerDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {PublishLockerDto} publishLockerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async lockerControllerPublish(publishLockerDto: PublishLockerDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Locker>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.lockerControllerPublish(publishLockerDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateLockerPinDto} updateLockerPinDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async lockerControllerResetLockerPassword(id: string, updateLockerPinDto: UpdateLockerPinDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthenticatedLocker>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.lockerControllerResetLockerPassword(id, updateLockerPinDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1297,12 +1560,31 @@ export const LockerApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
+         * @param {LoginLockerDto} loginLockerDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        lockerControllerLoginLocker(loginLockerDto: LoginLockerDto, options?: any): AxiosPromise<AuthenticatedLocker> {
+            return localVarFp.lockerControllerLoginLocker(loginLockerDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {PublishLockerDto} publishLockerDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         lockerControllerPublish(publishLockerDto: PublishLockerDto, options?: any): AxiosPromise<Locker> {
             return localVarFp.lockerControllerPublish(publishLockerDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateLockerPinDto} updateLockerPinDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        lockerControllerResetLockerPassword(id: string, updateLockerPinDto: UpdateLockerPinDto, options?: any): AxiosPromise<AuthenticatedLocker> {
+            return localVarFp.lockerControllerResetLockerPassword(id, updateLockerPinDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1368,6 +1650,17 @@ export class LockerApi extends BaseAPI {
 
     /**
      * 
+     * @param {LoginLockerDto} loginLockerDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LockerApi
+     */
+    public lockerControllerLoginLocker(loginLockerDto: LoginLockerDto, options?: AxiosRequestConfig) {
+        return LockerApiFp(this.configuration).lockerControllerLoginLocker(loginLockerDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {PublishLockerDto} publishLockerDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1375,6 +1668,18 @@ export class LockerApi extends BaseAPI {
      */
     public lockerControllerPublish(publishLockerDto: PublishLockerDto, options?: AxiosRequestConfig) {
         return LockerApiFp(this.configuration).lockerControllerPublish(publishLockerDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateLockerPinDto} updateLockerPinDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LockerApi
+     */
+    public lockerControllerResetLockerPassword(id: string, updateLockerPinDto: UpdateLockerPinDto, options?: AxiosRequestConfig) {
+        return LockerApiFp(this.configuration).lockerControllerResetLockerPassword(id, updateLockerPinDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1827,6 +2132,82 @@ export const OrgControllerApiAxiosParamCreator = function (configuration?: Confi
     return {
         /**
          * 
+         * @param {AttachAccountDto} attachAccountDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        orgControllerAttachBankAccount: async (attachAccountDto: AttachAccountDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'attachAccountDto' is not null or undefined
+            assertParamExists('orgControllerAttachBankAccount', 'attachAccountDto', attachAccountDto)
+            const localVarPath = `/api/catalog/org`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(attachAccountDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        orgControllerGetOrg: async (item: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'item' is not null or undefined
+            assertParamExists('orgControllerGetOrg', 'item', item)
+            const localVarPath = `/api/catalog/org/{item}/profile`
+                .replace(`{${"item"}}`, encodeURIComponent(String(item)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {UpdateOrganizationDto} updateOrganizationDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1864,16 +2245,145 @@ export const OrgControllerApiAxiosParamCreator = function (configuration?: Confi
                 options: localVarRequestOptions,
             };
         },
+    }
+};
+
+/**
+ * OrgControllerApi - functional programming interface
+ * @export
+ */
+export const OrgControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = OrgControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {AttachAccountDto} attachAccountDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async orgControllerAttachBankAccount(attachAccountDto: AttachAccountDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerAttachBankAccount(attachAccountDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async orgControllerGetOrg(item: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerGetOrg(item, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
         /**
          * 
          * @param {UpdateOrganizationDto} updateOrganizationDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orgControllerUpdate: async (updateOrganizationDto: UpdateOrganizationDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'updateOrganizationDto' is not null or undefined
-            assertParamExists('orgControllerUpdate', 'updateOrganizationDto', updateOrganizationDto)
-            const localVarPath = `/api/catalog/org`;
+        async orgControllerGetOrgAdmin(updateOrganizationDto: UpdateOrganizationDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerGetOrgAdmin(updateOrganizationDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * OrgControllerApi - factory interface
+ * @export
+ */
+export const OrgControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = OrgControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {AttachAccountDto} attachAccountDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        orgControllerAttachBankAccount(attachAccountDto: AttachAccountDto, options?: any): AxiosPromise<Organization> {
+            return localVarFp.orgControllerAttachBankAccount(attachAccountDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        orgControllerGetOrg(item: string, options?: any): AxiosPromise<void> {
+            return localVarFp.orgControllerGetOrg(item, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {UpdateOrganizationDto} updateOrganizationDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        orgControllerGetOrgAdmin(updateOrganizationDto: UpdateOrganizationDto, options?: any): AxiosPromise<Organization> {
+            return localVarFp.orgControllerGetOrgAdmin(updateOrganizationDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * OrgControllerApi - object-oriented interface
+ * @export
+ * @class OrgControllerApi
+ * @extends {BaseAPI}
+ */
+export class OrgControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {AttachAccountDto} attachAccountDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrgControllerApi
+     */
+    public orgControllerAttachBankAccount(attachAccountDto: AttachAccountDto, options?: AxiosRequestConfig) {
+        return OrgControllerApiFp(this.configuration).orgControllerAttachBankAccount(attachAccountDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} item 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrgControllerApi
+     */
+    public orgControllerGetOrg(item: string, options?: AxiosRequestConfig) {
+        return OrgControllerApiFp(this.configuration).orgControllerGetOrg(item, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UpdateOrganizationDto} updateOrganizationDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrgControllerApi
+     */
+    public orgControllerGetOrgAdmin(updateOrganizationDto: UpdateOrganizationDto, options?: AxiosRequestConfig) {
+        return OrgControllerApiFp(this.configuration).orgControllerGetOrgAdmin(updateOrganizationDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PayoutsControllerApi - axios parameter creator
+ * @export
+ */
+export const PayoutsControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        payoutControllerApprovePayout: async (item: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'item' is not null or undefined
+            assertParamExists('payoutControllerApprovePayout', 'item', item)
+            const localVarPath = `/api/catalog/payouts/{item}/approve`
+                .replace(`{${"item"}}`, encodeURIComponent(String(item)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1891,116 +2401,52 @@ export const OrgControllerApiAxiosParamCreator = function (configuration?: Confi
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateOrganizationDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
             };
         },
-    }
-};
-
-/**
- * OrgControllerApi - functional programming interface
- * @export
- */
-export const OrgControllerApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = OrgControllerApiAxiosParamCreator(configuration)
-    return {
         /**
          * 
-         * @param {UpdateOrganizationDto} updateOrganizationDto 
+         * @param {string} item 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async orgControllerGetOrgAdmin(updateOrganizationDto: UpdateOrganizationDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerGetOrgAdmin(updateOrganizationDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        payoutControllerClearPayout: async (item: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'item' is not null or undefined
+            assertParamExists('payoutControllerClearPayout', 'item', item)
+            const localVarPath = `/api/catalog/payouts/{item}/clear`
+                .replace(`{${"item"}}`, encodeURIComponent(String(item)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
         },
-        /**
-         * 
-         * @param {UpdateOrganizationDto} updateOrganizationDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async orgControllerUpdate(updateOrganizationDto: UpdateOrganizationDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Organization>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerUpdate(updateOrganizationDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-    }
-};
-
-/**
- * OrgControllerApi - factory interface
- * @export
- */
-export const OrgControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = OrgControllerApiFp(configuration)
-    return {
-        /**
-         * 
-         * @param {UpdateOrganizationDto} updateOrganizationDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        orgControllerGetOrgAdmin(updateOrganizationDto: UpdateOrganizationDto, options?: any): AxiosPromise<Organization> {
-            return localVarFp.orgControllerGetOrgAdmin(updateOrganizationDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {UpdateOrganizationDto} updateOrganizationDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        orgControllerUpdate(updateOrganizationDto: UpdateOrganizationDto, options?: any): AxiosPromise<Organization> {
-            return localVarFp.orgControllerUpdate(updateOrganizationDto, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * OrgControllerApi - object-oriented interface
- * @export
- * @class OrgControllerApi
- * @extends {BaseAPI}
- */
-export class OrgControllerApi extends BaseAPI {
-    /**
-     * 
-     * @param {UpdateOrganizationDto} updateOrganizationDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrgControllerApi
-     */
-    public orgControllerGetOrgAdmin(updateOrganizationDto: UpdateOrganizationDto, options?: AxiosRequestConfig) {
-        return OrgControllerApiFp(this.configuration).orgControllerGetOrgAdmin(updateOrganizationDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {UpdateOrganizationDto} updateOrganizationDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OrgControllerApi
-     */
-    public orgControllerUpdate(updateOrganizationDto: UpdateOrganizationDto, options?: AxiosRequestConfig) {
-        return OrgControllerApiFp(this.configuration).orgControllerUpdate(updateOrganizationDto, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-/**
- * PayoutsControllerApi - axios parameter creator
- * @export
- */
-export const PayoutsControllerApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
         /**
          * 
          * @param {*} [options] Override http request option.
@@ -2113,7 +2559,7 @@ export const PayoutsControllerApiAxiosParamCreator = function (configuration?: C
         payoutControllerPublish: async (publishPayoutDto: PublishPayoutDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'publishPayoutDto' is not null or undefined
             assertParamExists('payoutControllerPublish', 'publishPayoutDto', publishPayoutDto)
-            const localVarPath = `/api/catalog/payouts`;
+            const localVarPath = `/api/catalog/payouts/request-payout`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2198,6 +2644,26 @@ export const PayoutsControllerApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async payoutControllerApprovePayout(item: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Payout>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.payoutControllerApprovePayout(item, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async payoutControllerClearPayout(item: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Payout>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.payoutControllerClearPayout(item, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2257,6 +2723,24 @@ export const PayoutsControllerApiFactory = function (configuration?: Configurati
     return {
         /**
          * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        payoutControllerApprovePayout(item: string, options?: any): AxiosPromise<Payout> {
+            return localVarFp.payoutControllerApprovePayout(item, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        payoutControllerClearPayout(item: string, options?: any): AxiosPromise<Payout> {
+            return localVarFp.payoutControllerClearPayout(item, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -2309,6 +2793,28 @@ export const PayoutsControllerApiFactory = function (configuration?: Configurati
  * @extends {BaseAPI}
  */
 export class PayoutsControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} item 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PayoutsControllerApi
+     */
+    public payoutControllerApprovePayout(item: string, options?: AxiosRequestConfig) {
+        return PayoutsControllerApiFp(this.configuration).payoutControllerApprovePayout(item, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} item 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PayoutsControllerApi
+     */
+    public payoutControllerClearPayout(item: string, options?: AxiosRequestConfig) {
+        return PayoutsControllerApiFp(this.configuration).payoutControllerClearPayout(item, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {*} [options] Override http request option.
@@ -2868,6 +3374,310 @@ export class ProductApi extends BaseAPI {
      */
     public productControllerUpdate(item: string, updateProductDto: UpdateProductDto, options?: AxiosRequestConfig) {
         return ProductApiFp(this.configuration).productControllerUpdate(item, updateProductDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * PurchaseControllerApi - axios parameter creator
+ * @export
+ */
+export const PurchaseControllerApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerGetById: async (item: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'item' is not null or undefined
+            assertParamExists('purchaseControllerGetById', 'item', item)
+            const localVarPath = `/api/catalog/Purchase/{item}`
+                .replace(`{${"item"}}`, encodeURIComponent(String(item)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerGetPurchasesAdmin: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/catalog/Purchase`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} lockerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerGetPurchasesLocker: async (lockerId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'lockerId' is not null or undefined
+            assertParamExists('purchaseControllerGetPurchasesLocker', 'lockerId', lockerId)
+            const localVarPath = `/api/catalog/Purchase/get-locker-purchases`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (lockerId !== undefined) {
+                localVarQueryParameter['locker_id'] = lockerId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {PublishPurchaseDto} publishPurchaseDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerPublish: async (publishPurchaseDto: PublishPurchaseDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'publishPurchaseDto' is not null or undefined
+            assertParamExists('purchaseControllerPublish', 'publishPurchaseDto', publishPurchaseDto)
+            const localVarPath = `/api/catalog/Purchase/make-purchase`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(publishPurchaseDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * PurchaseControllerApi - functional programming interface
+ * @export
+ */
+export const PurchaseControllerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = PurchaseControllerApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async purchaseControllerGetById(item: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Purchase>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.purchaseControllerGetById(item, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async purchaseControllerGetPurchasesAdmin(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Purchase>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.purchaseControllerGetPurchasesAdmin(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} lockerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async purchaseControllerGetPurchasesLocker(lockerId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Purchase>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.purchaseControllerGetPurchasesLocker(lockerId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {PublishPurchaseDto} publishPurchaseDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async purchaseControllerPublish(publishPurchaseDto: PublishPurchaseDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Purchase>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.purchaseControllerPublish(publishPurchaseDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * PurchaseControllerApi - factory interface
+ * @export
+ */
+export const PurchaseControllerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = PurchaseControllerApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {string} item 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerGetById(item: string, options?: any): AxiosPromise<Purchase> {
+            return localVarFp.purchaseControllerGetById(item, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerGetPurchasesAdmin(options?: any): AxiosPromise<Array<Purchase>> {
+            return localVarFp.purchaseControllerGetPurchasesAdmin(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} lockerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerGetPurchasesLocker(lockerId: string, options?: any): AxiosPromise<Array<Purchase>> {
+            return localVarFp.purchaseControllerGetPurchasesLocker(lockerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {PublishPurchaseDto} publishPurchaseDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        purchaseControllerPublish(publishPurchaseDto: PublishPurchaseDto, options?: any): AxiosPromise<Purchase> {
+            return localVarFp.purchaseControllerPublish(publishPurchaseDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * PurchaseControllerApi - object-oriented interface
+ * @export
+ * @class PurchaseControllerApi
+ * @extends {BaseAPI}
+ */
+export class PurchaseControllerApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} item 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseControllerApi
+     */
+    public purchaseControllerGetById(item: string, options?: AxiosRequestConfig) {
+        return PurchaseControllerApiFp(this.configuration).purchaseControllerGetById(item, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseControllerApi
+     */
+    public purchaseControllerGetPurchasesAdmin(options?: AxiosRequestConfig) {
+        return PurchaseControllerApiFp(this.configuration).purchaseControllerGetPurchasesAdmin(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} lockerId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseControllerApi
+     */
+    public purchaseControllerGetPurchasesLocker(lockerId: string, options?: AxiosRequestConfig) {
+        return PurchaseControllerApiFp(this.configuration).purchaseControllerGetPurchasesLocker(lockerId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {PublishPurchaseDto} publishPurchaseDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PurchaseControllerApi
+     */
+    public purchaseControllerPublish(publishPurchaseDto: PublishPurchaseDto, options?: AxiosRequestConfig) {
+        return PurchaseControllerApiFp(this.configuration).purchaseControllerPublish(publishPurchaseDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -22,6 +22,7 @@ import { Locker } from "../../../sdk/catalog";
 import { LockerAssets } from "./LockerAssets";
 import { LockerDetails } from "./LockerDetails";
 import { LockerHistory } from "./LockerHistory";
+import { LockerPurchases } from "./LockerPurchases";
 
 export default function LockerScreen() {
   let [locker, setLocker] = useState<Locker>();
@@ -82,7 +83,7 @@ export default function LockerScreen() {
               <Tabs.List>
                 <Tabs.Tab value="profile">Details</Tabs.Tab>
                 <Tabs.Tab value="items">Assets</Tabs.Tab>
-                <Tabs.Tab value="history">History</Tabs.Tab>
+                <Tabs.Tab value="purchases">Purchases</Tabs.Tab>
               </Tabs.List>
 
               <Tabs.Panel value="profile" pt="xs">
@@ -92,10 +93,13 @@ export default function LockerScreen() {
               <Tabs.Panel value="items" pt="xs">
                 <LockerAssets locker={locker} />
               </Tabs.Panel>
-
+              <Tabs.Panel value="purchases" pt="xs">
+                <LockerPurchases locker={locker} />
+              </Tabs.Panel>
+              {/* 
               <Tabs.Panel value="history" pt="xs">
                 <LockerHistory locker={locker} />
-              </Tabs.Panel>
+              </Tabs.Panel> */}
             </Tabs>
           </Stack>
         </Paper>

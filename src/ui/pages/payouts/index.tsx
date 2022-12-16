@@ -2,19 +2,26 @@ import {
   ActionIcon,
   Avatar,
   Box,
-
+  Button,
+  Grid,
   Group,
   Paper,
   SegmentedControl,
   Stack,
-  Table,
-  Text,
   Title,
 } from "@mantine/core";
+import { payoutManager } from "@store/payout";
+import { VerticalKeyValuePair } from "@ui/molecules/text";
 import { ArrowDown2 } from "iconsax-react";
 import { DataTable } from "mantine-datatable";
+import { observer } from "mobx-react";
+import { useEffect } from "react";
+import { payoutsControllerApi } from "../../../config/sdk";
 
-export default function PayoutsScreen() {
+export default observer(function PayoutsScreen() {
+  useEffect(() => {
+    payoutManager.loadItems();
+  }, []);
   return (
     <Box style={{ overflow: "hidden !important" }} mt="xl">
       <Stack>
@@ -59,19 +66,60 @@ export default function PayoutsScreen() {
                 verticalSpacing="md"
                 noRecordsIcon={true}
                 borderRadius="xs"
-                // records={payoutManager.items}
+                records={payoutManager.items}
                 rowExpansion={{
                   allowMultiple: true,
                   content: (props) => {
                     let data = props.record;
                     return (
                       <Box p="md" key={props.recordIndex}>
-                        <Box p="md" sx={{ background: "ghostwhite" }}></Box>
+                        <Box p="md" sx={{ background: "ghostwhite" }}>
+                          <Grid>
+                            <Grid.Col md={4}>
+                              <VerticalKeyValuePair
+                                label="Status"
+                                value={`${data.status}`}
+                              />
+                            </Grid.Col>
+                            <Grid.Col md={4}>
+                              <VerticalKeyValuePair
+                                label="Created At"
+                                value={`${new Date(
+                                  data.updated_at
+                                ).toDateString()}`}
+                              />
+                            </Grid.Col>
+                            <Grid.Col md={4}>
+                              <VerticalKeyValuePair
+                                label="Update At"
+                                value={`${new Date(
+                                  data.created_at
+                                ).toDateString()}`}
+                              />
+                            </Grid.Col>
+                          </Grid>
+
+                          <Group position="right">
+                            {data.status == "pending" ? (
+                              <Button
+                                onClick={async () => {
+                                  //@ts-ignore
+                                  await payoutsControllerApi.payoutControllerClearPayout(
+                                    //@ts-ignore
+                                    data._id
+                                  );
+                                  payoutManager.loadItems();
+                                }}
+                              >
+                                Clear Payout
+                              </Button>
+                            ) : null}
+                          </Group>
+                        </Box>
                       </Box>
                     );
                   },
                 }}
-                records={[{}, {}]}
                 withBorder={false}
                 columns={[
                   {
@@ -89,22 +137,18 @@ export default function PayoutsScreen() {
                   },
                   {
                     accessor: "photo",
-                    title: "Photo",
-                    width: 100,
+                    title: "Agent Profile",
+                    width: 200,
                     render: () => {
                       return <Avatar size={"lg"} />;
                     },
                   },
                   {
-                    accessor: "agent",
-                    title: "Agent",
+                    accessor: "notes",
+                    title: "Notes",
                   },
                   {
-                    accessor: "items",
-                    title: "Item Summary",
-                  },
-                  {
-                    accessor: "items",
+                    accessor: "sum_total",
                     title: "Total Amount",
                   },
                   {
@@ -127,4 +171,4 @@ export default function PayoutsScreen() {
       </Stack>
     </Box>
   );
-}
+});

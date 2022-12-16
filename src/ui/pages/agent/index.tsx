@@ -41,28 +41,9 @@ export default function AgentScreen() {
               </Group>
             </Group>
 
-            <Tabs defaultValue="profile" variant="pills">
-              <Tabs.List>
-                <Tabs.Tab value="profile">Details</Tabs.Tab>
-                <Tabs.Tab value="transactions">Transactions</Tabs.Tab>
-                <Tabs.Tab value="payouts">Payouts</Tabs.Tab>
-              </Tabs.List>
+            <AgentDetails />
 
-              <Tabs.Panel value="profile" pt="xs">
-                <AgentDetails />
-              </Tabs.Panel>
-
-              <Tabs.Panel value="transactions" pt="xs">
-                <AgentTransactions />
-              </Tabs.Panel>
-              <Tabs.Panel value="payouts" pt="xs">
-                <AgentPayouts />
-              </Tabs.Panel>
-
-              <Tabs.Panel value="payouts" pt="xs">
-                <AgentPayouts />
-              </Tabs.Panel>
-            </Tabs>
+            
           </Stack>
         </Paper>
       </Stack>

@@ -4,14 +4,11 @@ import {
   Box,
   Divider,
   Group,
-  Input,
   Paper,
   Stack,
-  Table,
   Text,
   Title,
 } from "@mantine/core";
-import { productManager } from "@store/catalog/product";
 import { usersManager } from "@store/users";
 import { ArrowDown2 } from "iconsax-react";
 import { DataTable } from "mantine-datatable";
@@ -21,7 +18,7 @@ import { Expand } from "../store/products/Expand";
 
 export default observer(function CustomersScreen() {
   useEffect(() => {
-    usersManager.loadItems();
+  
   }, []);
   return (
     <Box style={{ overflow: "hidden !important" }} mt="xl">
@@ -36,9 +33,8 @@ export default observer(function CustomersScreen() {
           <Stack>
             <Group position="apart">
               <Box>
-                <Title sx={{ fontSize: 24 }}>Customers (19)</Title>
+                <Title sx={{ fontSize: 24 }}>Customers</Title>
               </Box>
-              <Input radius={"xl"} placeholder="Search Customer" />
             </Group>
 
             <Divider />

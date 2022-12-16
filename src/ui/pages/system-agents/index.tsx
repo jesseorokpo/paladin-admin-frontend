@@ -45,16 +45,12 @@ export default observer(function SystemAgentsScreen() {
                 <NewAgentProcess />
               </Group>
             </Group>
-            <Group position="apart">
-              <SegmentedControl
-                data={[
-                  { label: "All Agents", value: "react" },
-                  { label: "Active", value: "ng" },
-                  { label: "Blocked", value: "vue" },
-                ]}
-              />
-              <Select data={[]} placeholder="Select School" />
-            </Group>
+            <SegmentedControl
+              data={[
+                { label: "All Agents", value: "react" },
+                { label: "Active", value: "ng" },
+              ]}
+            />
 
             <Divider />
 

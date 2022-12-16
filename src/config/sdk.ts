@@ -7,11 +7,10 @@ import {
   TaxonomyApi,
   PayoutsControllerApi,
   UsersControllerApi,
+  PurchaseControllerApi,
 } from "../sdk/catalog";
-import { TOKEN } from "./config";
 
 let config = {
-  accessToken: TOKEN,
   isJsonMime: (mime: any) => {
     return true;
   },
@@ -54,6 +53,11 @@ export let payoutsControllerApi = new PayoutsControllerApi(
   axiosConfig
 );
 
+export let purchaseControllerApi = new PurchaseControllerApi(
+  config,
+  undefined,
+  axiosConfig
+);
 export function configureClientSDK(token: string) {
   let config = {
     accessToken: token,
@@ -63,6 +67,12 @@ export function configureClientSDK(token: string) {
   };
 
   productApiController = new ProductApi(config, undefined, axiosConfig);
+
+  purchaseControllerApi = new PurchaseControllerApi(
+    config,
+    undefined,
+    axiosConfig
+  );
   taxonomyApiController = new TaxonomyApi(config, undefined, axiosConfig);
   lockerApiController = new LockerApi(config, undefined, axiosConfig);
   orderControllerApi = new OrderControllerApi(config, undefined, axiosConfig);
