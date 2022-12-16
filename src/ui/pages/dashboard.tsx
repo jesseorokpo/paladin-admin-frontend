@@ -6,6 +6,11 @@ import {
   Stack,
   useMantineTheme,
 } from "@mantine/core";
+import { authManager } from "@store/account/auth";
+import { orderManager } from "@store/catalog/order";
+import { lockerManager } from "@store/locker";
+import { payoutManager } from "@store/payout";
+import { usersManager } from "@store/users";
 import { VerticalKeyValuePair } from "@ui/molecules/text";
 import { MainStatsCard } from "@ui/organisms/dashboard-widgets";
 import { SectionHeader } from "@ui/organisms/header-widgets/SectionHeader";
@@ -37,37 +42,37 @@ const AccountOverview = observer(() => {
           <Grid.Col md={3}>
             <MainStatsCard
               label="Total Lockers"
-              caption="this month"
+              caption="at this moment"
               color="orange"
               icon={<Document variant="Bold" color="gray" />}
-              value="0"
+              value={lockerManager.items.length + ""}
             />
           </Grid.Col>
           <Grid.Col md={3}>
             <MainStatsCard
               label="Total Orders"
-              caption="this month"
+              caption="at this moment"
               color="orange"
               icon={<Document variant="Bold" color="gray" />}
-              value="0"
+              value={orderManager.items.length + ""}
             />
           </Grid.Col>
           <Grid.Col md={3}>
             <MainStatsCard
               label="Total Agents"
-              caption="this month"
+              caption="at this moment"
               color="orange"
               icon={<Card variant="Bold" color="gray" />}
-              value="0"
+              value={usersManager.agents.length + ""}
             />
           </Grid.Col>
           <Grid.Col md={3}>
             <MainStatsCard
               label="Total Payouts "
-              caption="this month"
+              caption="at this moment"
               color="orange"
               icon={<Card variant="Bold" color="gray" />}
-              value="0"
+              value={payoutManager.items.length + ""}
             />
           </Grid.Col>
         </Grid>
@@ -77,6 +82,7 @@ const AccountOverview = observer(() => {
 });
 
 const AccountOthers = observer(() => {
+  let { email, first_name, last_name, photo, phone } = authManager.user;
   return (
     <Paper
       p={"18px"}
@@ -107,17 +113,14 @@ const AccountOthers = observer(() => {
                   />
                 </Grid.Col>
                 <Grid.Col md={5}>
-                  <VerticalKeyValuePair label="First Name" value="Joshua" />
-                  <VerticalKeyValuePair label="Last Name" value="Nwafor" />
-                  <VerticalKeyValuePair
-                    label="Email"
-                    value="joshuanwafor01@gmail.com"
-                  />
+                  <VerticalKeyValuePair label="First Name" value={first_name} />
+                  <VerticalKeyValuePair label="Last Name" value={last_name} />
+                  <VerticalKeyValuePair label="Email" value={email} />
                 </Grid.Col>
                 <Grid.Col md={5}>
-                  <VerticalKeyValuePair label="Phone" value="+2349019293032" />
+                  <VerticalKeyValuePair label="Phone" value={phone ?? "N/A"} />
                   <VerticalKeyValuePair label="Address" value="N/A" />
-                  <VerticalKeyValuePair label="Gender" value="Male" />
+                  <VerticalKeyValuePair label="Status" value="Active" />
                 </Grid.Col>
               </Grid>
             </Stack>

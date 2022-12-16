@@ -1,9 +1,4 @@
 import {
-  Avatar,
-  Badge,
-  Box,
-  Button,
-  Container,
   Grid,
   Group,
   Paper,
@@ -12,6 +7,9 @@ import {
   Title,
   useMantineTheme,
 } from "@mantine/core";
+import { orderManager } from "@store/catalog/order";
+import { productManager } from "@store/catalog/product";
+import { taxonomyManager } from "@store/catalog/taxonomy";
 import { VerticalKeyValuePair } from "@ui/molecules/text";
 import { MainStatsCard } from "@ui/organisms/dashboard-widgets";
 import { SectionHeader } from "@ui/organisms/header-widgets/SectionHeader";
@@ -42,37 +40,28 @@ function AccountOverview() {
           <Grid.Col md={3}>
             <MainStatsCard
               label="Total Products"
-              caption="this month"
+              caption="at this moment"
               color="orange"
               icon={<Document variant="Bold" color="gray" />}
-              value="0"
+              value={productManager.items.length + ""}
             />
           </Grid.Col>
           <Grid.Col md={3}>
             <MainStatsCard
               label="Total Categories"
-              caption="this month"
+              caption="at this moment"
               color="orange"
               icon={<LockCircle variant="Bold" color="gray" />}
-              value="0"
+              value={taxonomyManager.items.length + ""}
             />
           </Grid.Col>
           <Grid.Col md={3}>
             <MainStatsCard
               label="Total Orders"
-              caption="this month"
+              caption="at this moment"
               color="orange"
               icon={<Card variant="Bold" color="gray" />}
-              value="0"
-            />
-          </Grid.Col>
-          <Grid.Col md={3}>
-            <MainStatsCard
-              label="Total Outstanding"
-              caption="this month"
-              color="orange"
-              icon={<Card variant="Bold" color="gray" />}
-              value="0"
+              value={orderManager.items.length + ""}
             />
           </Grid.Col>
         </Grid>
