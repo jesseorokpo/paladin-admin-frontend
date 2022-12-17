@@ -82,7 +82,7 @@ const AccountOverview = observer(() => {
 });
 
 const AccountOthers = observer(() => {
-  let { email, first_name, last_name, photo, phone } = authManager.user;
+  let profile = authManager.user;
   return (
     <Paper
       p={"18px"}
@@ -113,12 +113,12 @@ const AccountOthers = observer(() => {
                   />
                 </Grid.Col>
                 <Grid.Col md={5}>
-                  <VerticalKeyValuePair label="First Name" value={first_name} />
-                  <VerticalKeyValuePair label="Last Name" value={last_name} />
-                  <VerticalKeyValuePair label="Email" value={email} />
+                  <VerticalKeyValuePair label="First Name" value={profile?.first_name} />
+                  <VerticalKeyValuePair label="Last Name" value={profile?.last_name} />
+                  <VerticalKeyValuePair label="Email" value={profile?.email} />
                 </Grid.Col>
                 <Grid.Col md={5}>
-                  <VerticalKeyValuePair label="Phone" value={phone ?? "N/A"} />
+                  <VerticalKeyValuePair label="Phone" value={profile?.phone ?? "N/A"} />
                   <VerticalKeyValuePair label="Address" value="N/A" />
                   <VerticalKeyValuePair label="Status" value="Active" />
                 </Grid.Col>

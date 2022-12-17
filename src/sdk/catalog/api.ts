@@ -119,6 +119,12 @@ export interface AuthenticatedLocker {
      * @memberof AuthenticatedLocker
      */
     'token': string;
+    /**
+     * 
+     * @type {Locker}
+     * @memberof AuthenticatedLocker
+     */
+    'locker': Locker;
 }
 /**
  * 
@@ -420,6 +426,18 @@ export interface Product {
      * @memberof Product
      */
     'id': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Product
+     */
+    'is_trending': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Product
+     */
+    'is_top_product': boolean;
     /**
      * 
      * @type {string}
@@ -882,28 +900,16 @@ export interface UpdateOrganizationDto {
 export interface UpdateProductDto {
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof UpdateProductDto
      */
-    'name'?: string;
+    'is_trending': boolean;
     /**
      * 
-     * @type {number}
+     * @type {boolean}
      * @memberof UpdateProductDto
      */
-    'price'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateProductDto
-     */
-    'type': UpdateProductDtoTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateProductDto
-     */
-    'status': string;
+    'is_top_product': boolean;
     /**
      * 
      * @type {string}
@@ -923,14 +929,6 @@ export interface UpdateProductDto {
      */
     'collections': Array<string>;
 }
-
-export const UpdateProductDtoTypeEnum = {
-    Physical: 'physical',
-    Digital: 'digital'
-} as const;
-
-export type UpdateProductDtoTypeEnum = typeof UpdateProductDtoTypeEnum[keyof typeof UpdateProductDtoTypeEnum];
-
 /**
  * 
  * @export

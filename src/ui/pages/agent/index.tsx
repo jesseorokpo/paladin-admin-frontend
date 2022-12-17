@@ -36,7 +36,7 @@ export default observer(function AgentScreen() {
   }
 
   console.log(params);
-  async function loadLocker() {
+  async function loadProfile() {
     try {
       startNavigationProgress();
       let response = await orgControllerApi.orgControllerGetOrg(
@@ -50,7 +50,7 @@ export default observer(function AgentScreen() {
   }
 
   useEffect(() => {
-    loadLocker();
+    loadProfile();
   }, []);
 
   if (agentProfile == undefined) {

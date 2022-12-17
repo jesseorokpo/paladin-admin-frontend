@@ -8,11 +8,13 @@ import {
   Stack,
   Title,
 } from "@mantine/core";
+import { showNotification } from "@mantine/notifications";
 import { productManager } from "@store/catalog/product";
 import {
   HorizontalKeyValuePair,
   VerticalKeyValuePair,
 } from "@ui/molecules/text";
+import { productApiController } from "../../../../config/sdk";
 import { Product } from "../../../../sdk/catalog";
 
 export const Expand = ({ product }: { product: Product }) => {
@@ -29,16 +31,81 @@ export const Expand = ({ product }: { product: Product }) => {
             </Grid.Col>
             <Grid.Col md={6}>
               <Group position="right">
-                <Button color={"red"}>Edit</Button>
-                <Button
-                  color={"green"}
-                  onClick={() => {
-                    //@ts-ignore
-                    productManager.deleteItem(product._id);
-                  }}
-                >
-                  Delete
-                </Button>
+                {product.is_trending !== true ? (
+                  <Button
+                    color={"green"}
+                    onClick={() => {
+                      //@ts-ignore
+                      productApiController.productControllerUpdate(
+                         //@ts-ignore
+                        product._id,
+                        {
+                          ...product,
+                          is_trending: true,
+                        }
+                      );
+                      showNotification({message:"Request sent"})
+                    }}
+                  >
+                    Enable Trending
+                  </Button>
+                ) : (
+                  <Button
+                    color={"red"}
+                    onClick={() => {
+                      //@ts-ignore
+                      productApiController.productControllerUpdate(
+                         //@ts-ignore
+                        product._id,
+                        {
+                          ...product,
+                          is_trending: false,
+                        }
+                      );
+                      showNotification({message:"Request sent"})
+                    }}
+                  >
+                    Disable Trending
+                  </Button>
+                )}
+
+                {product.is_top_product !== true ? (
+                  <Button
+                    color={"green"}
+                    onClick={() => {
+                      //@ts-ignore
+                      productApiController.productControllerUpdate(
+                         //@ts-ignore
+                        product._id,
+                        {
+                          ...product,
+                          is_top_product: true,
+                        }
+                      );
+                      showNotification({message:"Request sent"})
+                    }}
+                  >
+                    Enable Top Product
+                  </Button>
+                ) : (
+                  <Button
+                    color={"red"}
+                    onClick={() => {
+                      //@ts-ignore
+                      productApiController.productControllerUpdate(
+                         //@ts-ignore
+                        product._id,
+                        {
+                          ...product,
+                          is_top_product: false,
+                        }
+                      );
+                      showNotification({message:"Request sent"})
+                    }}
+                  >
+                    Disable Top Product
+                  </Button>
+                )}
               </Group>
             </Grid.Col>
           </Grid>
