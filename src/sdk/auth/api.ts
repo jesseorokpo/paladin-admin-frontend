@@ -225,6 +225,30 @@ export interface SignUpOrgDto {
      * @memberof SignUpOrgDto
      */
     'handle': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignUpOrgDto
+     */
+    'school_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignUpOrgDto
+     */
+    'state': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignUpOrgDto
+     */
+    'address': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignUpOrgDto
+     */
+    'payment_account': string;
 }
 /**
  * 

@@ -382,6 +382,30 @@ export interface Organization {
      * @memberof Organization
      */
     'updated_at': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Organization
+     */
+    'school_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Organization
+     */
+    'state': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Organization
+     */
+    'address': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Organization
+     */
+    'payment_account': string;
 }
 /**
  * 
