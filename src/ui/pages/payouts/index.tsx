@@ -47,17 +47,7 @@ export default observer(function PayoutsScreen() {
                 };
               }}
             >
-              <Group>
-                <SegmentedControl
-                  data={[
-                    { label: "All Requests", value: "all" },
-                    { label: "Pending", value: "pending" },
-                    { label: "Completed", value: "completed" },
-                    { label: "Processing", value: "processing" },
-                  ]}
-                />
-              </Group>
-
+        
               <DataTable
                 height={500}
                 striped={false}
@@ -100,6 +90,9 @@ export default observer(function PayoutsScreen() {
                           </Grid>
 
                           <Group position="right">
+                            {/* <Button color="green" onClick={async () => {}}>
+                              Payment Details
+                            </Button> */}
                             {data.status == "pending" ? (
                               <Button
                                 onClick={async () => {
