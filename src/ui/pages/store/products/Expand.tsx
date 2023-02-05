@@ -14,6 +14,7 @@ import {
   HorizontalKeyValuePair,
   VerticalKeyValuePair,
 } from "@ui/molecules/text";
+import { UpdateProductProcess } from "@ui/organisms/processes/update-product-process";
 import { productApiController } from "../../../../config/sdk";
 import { Product } from "../../../../sdk/catalog";
 
@@ -31,6 +32,7 @@ export const Expand = ({ product }: { product: Product }) => {
             </Grid.Col>
             <Grid.Col md={6}>
               <Group position="right">
+                <UpdateProductProcess product={product}/>
                 {product.is_trending !== true ? (
                   <Button
                     color={"green"}

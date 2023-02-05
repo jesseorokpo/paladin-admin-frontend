@@ -20,20 +20,24 @@ import Dropzone, { useDropzone } from "react-dropzone";
 import { uploadImage } from "@services/cloudinary";
 import { Edit2 } from "iconsax-react";
 import { productManager } from "@store/catalog/product";
-import { PublishProductDtoTypeEnum } from "../../../sdk/catalog";
+import {
+  Product,
+  PublishProductDtoTypeEnum,
+  UpdateProductDto,
+} from "../../../sdk/catalog";
 import { taxonomyManager } from "@store/catalog/taxonomy";
 
-export function NewProductProcess() {
+export function UpdateProductProcess({ product }: { product: Product }) {
   const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const form = useForm({
+  const form = useForm<UpdateProductDto>({
     initialValues: {
-      price: 0,
-      body: "",
-      image: "",
-      name: "",
-      category: "",
+      body: product.body,
+      collections: product.collections,
+      image: product.image,
+      is_top_product: product.is_top_product,
+      is_trending: product.is_trending,
     },
   });
 
@@ -42,16 +46,13 @@ export function NewProductProcess() {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title="Create Product"
+        title="Update Product"
       >
         <form
           onSubmit={form.onSubmit((values) => {
-            productManager.publishItem({
+            //@ts-ignore
+            productManager.updateItem(product._id, {
               ...values,
-              price: parseInt(values.price + ""),
-              collections: [],
-              status: "available",
-              type: "physical",
             });
 
             setOpened(false);
@@ -101,7 +102,9 @@ export function NewProductProcess() {
               </Box>
             </Grid.Col>
             <Grid.Col md={12}>
-              <TextInput label="Product Name" {...form.getInputProps("name")} />
+              <TextInput label="Product Name" 
+              value={product.name}
+              disabled />
             </Grid.Col>
             <Grid.Col md={12}>
               <Textarea label="Description" {...form.getInputProps("body")} />
@@ -110,7 +113,8 @@ export function NewProductProcess() {
               <TextInput
                 label="Price"
                 type={"number"}
-                {...form.getInputProps("price")}
+               value={product.price}
+                disabled
               />
             </Grid.Col>
             <Grid.Col md={6}>
@@ -128,16 +132,14 @@ export function NewProductProcess() {
           <Grid>
             <Grid.Col span={12}>
               <Button fullWidth type="submit" loading={loading}>
-                Create
+                Update Product
               </Button>
             </Grid.Col>
           </Grid>
         </form>
       </Modal>
 
-      <Group position="center">
-        <Button onClick={() => setOpened(true)}>Create Product</Button>
-      </Group>
+      <Button onClick={() => setOpened(true)}>Update</Button>
     </>
   );
 }

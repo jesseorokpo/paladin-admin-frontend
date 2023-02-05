@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { productApiController } from "../../config/sdk";
+import {AxiosError} from "axios"
 import {
   Product,
   PublishProductDto,
@@ -39,14 +40,19 @@ class Manager {
   }
 
   updateItem(id: string, payload: UpdateProductDto) {
+    console.log(id)
     productApiController
       .productControllerUpdate(id, payload)
       .then((payload) => {
+          console.log(payload)
         runInAction(() => {
           // @ts-ignore
           const index = this.items.findIndex((element) => element._id == id);
           this.items[index] = { ...payload, ...this.items[index] };
         });
+      }).catch(e=>{
+        let err:AxiosError= e as AxiosError;
+        console.log(err.response)
       });
   }
 
