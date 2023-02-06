@@ -42,6 +42,7 @@ export function NewAdminProcess() {
               setSubmitting(true);
               await authController.authControllerSignupAdmin({
                 ...values,
+                account_type:"admin"
               });
               showNotification({
                 message: "Creating agent account in  background",

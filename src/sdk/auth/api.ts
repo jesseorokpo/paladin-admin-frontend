@@ -163,6 +163,12 @@ export interface SignUpDto {
      * @type {string}
      * @memberof SignUpDto
      */
+    'account_type': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignUpDto
+     */
     'phone': string;
     /**
      * 

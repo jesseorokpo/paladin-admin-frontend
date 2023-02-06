@@ -29,6 +29,7 @@ export function RegisterationScreen(props: any) {
       email: "",
       password: "",
       confirm_password: "",
+      
     },
   });
 
