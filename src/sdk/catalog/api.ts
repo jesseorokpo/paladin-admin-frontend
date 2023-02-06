@@ -942,6 +942,12 @@ export interface UpdateProductDto {
     'body': string;
     /**
      * 
+     * @type {number}
+     * @memberof UpdateProductDto
+     */
+    'price': number;
+    /**
+     * 
      * @type {string}
      * @memberof UpdateProductDto
      */

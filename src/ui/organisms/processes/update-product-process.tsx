@@ -38,6 +38,7 @@ export function UpdateProductProcess({ product }: { product: Product }) {
       image: product.image,
       is_top_product: product.is_top_product,
       is_trending: product.is_trending,
+      price: product.price,
     },
   });
 
@@ -102,9 +103,7 @@ export function UpdateProductProcess({ product }: { product: Product }) {
               </Box>
             </Grid.Col>
             <Grid.Col md={12}>
-              <TextInput label="Product Name" 
-              value={product.name}
-              disabled />
+              <TextInput label="Product Name" value={product.name} disabled />
             </Grid.Col>
             <Grid.Col md={12}>
               <Textarea label="Description" {...form.getInputProps("body")} />
@@ -113,8 +112,7 @@ export function UpdateProductProcess({ product }: { product: Product }) {
               <TextInput
                 label="Price"
                 type={"number"}
-               value={product.price}
-                disabled
+                {...form.getInputProps("price")}
               />
             </Grid.Col>
             <Grid.Col md={6}>
