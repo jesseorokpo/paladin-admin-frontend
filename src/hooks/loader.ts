@@ -1,4 +1,6 @@
 import { orderManager } from "@store/catalog/order";
+import { productManager } from "@store/catalog/product";
+import {taxonomyManager} from "@store/catalog/taxonomy"
 import { dataManager } from "@store/data";
 import { payoutManager } from "@store/payout";
 import { usersManager } from "@store/users";
@@ -10,8 +12,8 @@ export function useUtilsLoader() {
       usersManager.loadItems(),
       payoutManager.loadItems(),
       orderManager.loadItems(),
-      dataManager.loadCategories(),
-      dataManager.loadProducts(),
+      productManager.loadItems(),
+      taxonomyManager.loadItems()
     ]).then((err) => {
       console.log(err);
     });
