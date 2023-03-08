@@ -48,7 +48,8 @@ class Manager {
         runInAction(() => {
           // @ts-ignore
           const index = this.items.findIndex((element) => element._id == id);
-          this.items[index] = { ...payload, ...this.items[index] };
+          this.items[index] =payload.data;
+          this.items=[...this.items]
         });
       }).catch(e=>{
         let err:AxiosError= e as AxiosError;

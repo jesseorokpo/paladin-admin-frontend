@@ -45,21 +45,14 @@ export default observer(function SystemAgentsScreen() {
                 <NewAgentProcess />
               </Group>
             </Group>
-            <SegmentedControl
-              data={[
-                { label: "All Agents", value: "react" },
-                { label: "Active", value: "ng" },
-              ]}
-            />
-
-            <Divider />
-
+        
+         
             <DataTable
-              height={500}
+             
               striped={false}
               withColumnBorders
               style={{ background: "ghostwhite", paddingTop: 0 }}
-              verticalSpacing="md"
+              verticalSpacing="xs"
               noRecordsIcon={true}
               borderRadius="xs"
               records={usersManager.agents}

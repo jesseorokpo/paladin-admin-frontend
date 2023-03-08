@@ -55,7 +55,7 @@ export default observer(function LockersScreen() {
               striped={false}
               withColumnBorders
               style={{ background: "ghostwhite", paddingTop: 0 }}
-              verticalSpacing="md"
+              verticalSpacing="xs"
               noRecordsIcon={true}
               borderRadius="xs"
               records={lockerManager.items}

@@ -39,11 +39,11 @@ export default observer(function SystemUsersScreen() {
             <Divider />
 
             <DataTable
-              height={500}
+            
               striped={false}
               withColumnBorders
               style={{ background: "ghostwhite", paddingTop: 0 }}
-              verticalSpacing="md"
+              verticalSpacing="xs"
               noRecordsIcon={true}
               borderRadius="xs"
               records={usersManager.admins}

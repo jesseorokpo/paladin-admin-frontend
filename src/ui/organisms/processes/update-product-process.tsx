@@ -54,6 +54,7 @@ export function UpdateProductProcess({ product }: { product: Product }) {
             //@ts-ignore
             productManager.updateItem(product._id, {
               ...values,
+              price: parseInt(values.price+"")
             });
 
             setOpened(false);
