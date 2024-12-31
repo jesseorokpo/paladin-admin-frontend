@@ -62,9 +62,9 @@ export function NewAgentProcess() {
             } catch (e) {
               let dd = e as AxiosError;
               console.log(dd.response?.data);
-              showNotification({
-                message: dd.response?.data?.message ?? "Something went wrong",
-              });
+              // showNotification({
+              //   message: dd.response?.data?.message ?? "Something went wrong",
+              // });
               setSubmitting(false);
             }
           })}

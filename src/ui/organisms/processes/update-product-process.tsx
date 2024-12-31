@@ -54,7 +54,7 @@ export function UpdateProductProcess({ product }: { product: Product }) {
             //@ts-ignore
             productManager.updateItem(product._id, {
               ...values,
-              price: parseInt(values.price+"")
+              price: parseInt(values.price + ""),
             });
 
             setOpened(false);
@@ -103,8 +103,11 @@ export function UpdateProductProcess({ product }: { product: Product }) {
                 </Dropzone>
               </Box>
             </Grid.Col>
-            <Grid.Col md={12}>
+            {/* <Grid.Col md={12}>
               <TextInput label="Product Name" value={product.name} disabled />
+            </Grid.Col> */}
+            <Grid.Col md={12}>
+              <TextInput label="Product Name" />
             </Grid.Col>
             <Grid.Col md={12}>
               <Textarea label="Description" {...form.getInputProps("body")} />
