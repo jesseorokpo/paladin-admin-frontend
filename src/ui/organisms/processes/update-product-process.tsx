@@ -106,6 +106,7 @@ export function UpdateProductProcess({ product }: { product: Product }) {
             {/* <Grid.Col md={12}>
               <TextInput label="Product Name" value={product.name} disabled />
             </Grid.Col> */}
+            {/* product name update */}
             <Grid.Col md={12}>
               <TextInput label="Product Name" />
             </Grid.Col>
