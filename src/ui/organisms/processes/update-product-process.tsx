@@ -39,6 +39,7 @@ export function UpdateProductProcess({ product }: { product: Product }) {
       is_top_product: product.is_top_product,
       is_trending: product.is_trending,
       price: product.price,
+      name: product.name,
     },
   });
 
@@ -108,7 +109,7 @@ export function UpdateProductProcess({ product }: { product: Product }) {
             </Grid.Col> */}
             {/* product name update */}
             <Grid.Col md={12}>
-              <TextInput label="Product Name" />
+              <TextInput label="Product Name" {...form.getInputProps("name")} />
             </Grid.Col>
             <Grid.Col md={12}>
               <Textarea label="Description" {...form.getInputProps("body")} />
